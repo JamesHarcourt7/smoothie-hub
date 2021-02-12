@@ -15,4 +15,13 @@
     })
   </script>
   <a href="/testdoc">Go to Testdoc</a>
+  <button onclick="ajax()">Run ajax test</button>
+  <script>
+    function ajax() {
+      var xhReq = new XMLHttpRequest();
+      xhReq.open("GET", "testdoc6", false);
+      xhReq.send(null);
+      var serverResponse = xhReq.responseText;
+    }
+  </script>
 </body>
