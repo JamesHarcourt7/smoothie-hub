@@ -17,7 +17,7 @@ http.createServer( function(req, res) {
 
   // Determine whether to load a file or a resource
   if(fs.existsSync(request) || fs.existsSync(request + '.htm')) {
-    if(!request.split('/')[0].includes("_files")) {
+    if(!request.split('/')[0].includes("_files") && !request.includes(".")) {
       fs.createReadStream(request + '.htm').pipe(res)
     } else {
       fs.createReadStream(request).pipe(res)
