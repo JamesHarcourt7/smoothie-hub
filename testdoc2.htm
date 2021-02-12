@@ -5,11 +5,13 @@
   <h1>Header level 1</h1>
   <p>Text text text</p>
   <p>Line 2</p>
+  <p id="counter">0</p>
   <embed src="/resources/smooth1.png">
   <p id="eventsensitive">CLICK HERE</p>
   <script>
+    i=0
     document.getElementById("eventsensitive").addEventListener("click", function() {
-      document.write("CLICK RECORDED")
+      document.getElementById("counter").innerHTML = i++
     })
   </script>
   <a href="/testdoc">Go to Testdoc</a>

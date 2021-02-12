@@ -18,8 +18,10 @@ http.createServer( function(req, res) {
   // Determine whether to load a file or a resource
   if(fs.existsSync(request) || fs.existsSync(request + '.htm')) {
     if(!request.split('/')[0].includes("_files") && !request.includes(".")) {
+      console.log("\t> Serving HTML from request")
       fs.createReadStream(request + '.htm').pipe(res)
     } else {
+      console.log("\t> Serving file from request")
       fs.createReadStream(request).pipe(res)
     }
   } else {
