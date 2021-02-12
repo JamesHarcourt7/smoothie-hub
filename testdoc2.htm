@@ -11,7 +11,7 @@
   <script>
     i=0
     document.getElementById("eventsensitive").addEventListener("click", function() {
-      document.getElementById("counter").innerHTML = i++
+      document.getElementById("eventsensitive").innerHTML = hash(document.getElementById("eventsensitive").innerHTML)
     })
   </script>
   <a href="/testdoc">Go to Testdoc</a>
@@ -24,4 +24,5 @@
       var serverResponse = xhReq.responseText;
     }
   </script>
+  <script src="/hashPassword.js"></script>
 </body>

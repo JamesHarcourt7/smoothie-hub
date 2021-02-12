@@ -30,6 +30,7 @@ const http = require('http')
 const fs = require('fs')
 var port = 8000
 
+// Reassure the user
 console.log("Initialising...")
 
 // Server function
