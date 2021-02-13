@@ -6,7 +6,7 @@
   <p>Text text text</p>
   <p>Line 2</p>
   <p id="counter">0</p>
-  <embed src="/getImageFromPost/frequentPoster1293718djsAJDISOAHFSOAs.jpg/testuser">
+  <embed src="/resources/smooth1.png">
   <p id="eventsensitive">CLICK HERE</p>
   <script>
     i=0
@@ -19,16 +19,19 @@
   <script>
     function ajax() {
       var xhReq = new XMLHttpRequest();
-      xhReq.open("GET", "testdoc6", false);
+      xhReq.open("GET", "GetImageFromPost/testuserGINAF38", false);
       xhReq.send(null);
       var serverResponse = xhReq.responseText;
+      console.log("AJAX Server Response: " + serverResponse)
     }
   </script>
   <script src="/hashPassword.js"></script>
   <p>--</p>
   <form action="post" method="post" enctype="multipart/form-data">
       <label>Image: </label><input type="file" name="postImage"><br>
+      <label><b>Title: </b></label><input type="text" name="postTitle"><br>
       <label>Description: </label><input type="text" name="postDescription"><br>
+      <label>Ingredients: </label><input type="text" name="postIngredients"><br>
       <input type="submit" value="Upload">
   </form>
 </body>

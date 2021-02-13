@@ -1,8 +1,8 @@
 
 // Classes
 class Post {
-  constructor(username, filename, description, ingredients)  {
-    this.username = username; this.filename = filename; this.description = description; this.ingredients = ingredients
+  constructor(username, filename, description, ingredients, title)  {
+    this.username = username; this.filename = filename; this.description = description; this.ingredients = ingredients; this.title = title
   }
   totalRating = 0
   numRatings = 0
@@ -51,10 +51,10 @@ function generatePostId(username) {
 function doesPostExist(username, id) {
   return fs.existsSync('/posts/'+username+'/'+id+'.jpg')
 }
-function enregisterPost(username, filename, description, ingredients) {
+function enregisterPost(username, filename, description, ingredients, title) {
   //fs.appendFileSync("posts.csv", username+","+filename+","+description+'\n')
-  posts.push(new Post(username, filename, description, ingredients))
-  postsDict[filename] = posts.length - 1
+  posts.push(new Post(username, filename, description, ingredients, title))
+  postsDict[filename.substring(0, filename.length-4)] = posts.length - 1
   savePosts()
 }
 function MakePost(req, res) {
@@ -76,7 +76,7 @@ function MakePost(req, res) {
       res.write('<a href=\'/home.html\'>Back to home</a>')
       res.end()
       //console.log(fields)
-      enregisterPost("testuser", postFilename, '\"' + fields.postDescription + '\"', fields.postIngredients)
+      enregisterPost("testuser", postFilename, '\"' + fields.postDescription + '\"', fields.postIngredients, fields.postTitle)
     });
   });
 }
@@ -164,6 +164,21 @@ http.createServer( function(req, res) {
     res.end(post.ingredients)
   } else
 
+  // Get title
+  if(request.includes("GetTitleFromPost")) {
+    // /GetDescFromPost/[post id]
+    split = request.split('/')
+    post = posts[postsDict[split[1]]]
+    res.end(post.title)
+  } else
+
+  // Full post information
+  if(request.includes("GetPostInfo")) {
+    split = request.split('/')
+    post = posts[postsDict[split[1]]]
+    res.end("<body><h1>" + post.title + "</h1><br><image src=\"/posts/" + post.username + "/" + post.filename + "\"><p>"+post.description+"</p><p>"+post.ingredients+"</p></body>")
+  } else
+
   // Suggesting a post
   if(request.includes("SuggestNextPost")) {
     // /SuggestNextPost/[username]
@@ -207,7 +222,7 @@ http.createServer( function(req, res) {
       res.end("404")
     }
   }
-  console.log("Response finished")
+  console.log("\t> Response finished")
 }).listen(port);
 
 console.log("Server listening")
