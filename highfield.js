@@ -78,8 +78,9 @@ function MakePost(req, res) {
   var uploadForm = new fm.IncomingForm()
   uploadForm.parse(req, function (error, fields, files) {
     var oldPath = files.postImage.path
-    postFilename = "testuser" + generatePostId("testuser") + ".jpg"
-    var newDir = __dirname + "/posts/testuser/"
+    var username = fields.username
+    postFilename = username + generatePostId(username) + ".jpg"
+    var newDir = __dirname + "/posts/" + username + "/"
     if(!fs.existsSync(newDir)) {
       fs.mkdirSync(newDir)
     }
@@ -89,11 +90,11 @@ function MakePost(req, res) {
       // you may respond with another html page
       res.writeHead(200, {'Content-Type': 'text:html'})
       res.write('<p>File uploaded and moved!</p>')
-      res.write('<embed src=\'/posts/testuser/'+postFilename+'\'>')
+      res.write('<embed src=\'/posts/' + username + '/'+postFilename+'\'>')
       res.write('<a href=\'/home.html\'>Back to home</a>')
       res.end()
       //console.log(fields)
-      enregisterPost("testuser", postFilename, '\"' + fields.postDescription + '\"', fields.postIngredients, fields.postTitle)
+      enregisterPost(username, postFilename, '\"' + fields.postDescription + '\"', fields.postIngredients, fields.postTitle)
     });
   });
 }
