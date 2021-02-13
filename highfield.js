@@ -10,6 +10,11 @@ class Post {
     return totalRating / numRatings
   }
 }
+class User {
+  constructor(username, hashedPassword, bio) {
+    this.username = username; this.hashedPassword = hashedPassword; this.bio = bio
+  }
+}
 
 // Input handling functions
 function sanitise (input) {
@@ -18,22 +23,24 @@ function sanitise (input) {
 
 // Account handling functions
 function AddUser (username, passHash) {
-  fs.appendFileSync("database.csv", username + "," + passHash + "\n")
+  //fs.appendFileSync("database.csv", username + "," + passHash + "\n")
+  users.push(new User(username, passHash, "I'm not human enough to have a bio"))
+  saveUsers()
 }
 function CheckUser (username, passHash) {
-  db = fs.readFileSync("database.csv", 'utf8').split('\n')
+  //db = fs.readFileSync("database.csv", 'utf8').split('\n')
   console.log("Checking \"" + username + "\",\"" + passHash + "\"")
-  for(var i = 0; i < db.length; i++) {
-    linesplit = db[i].split(',')
-    console.log(linesplit)
-    if(username == linesplit[0] && passHash == linesplit[1]) return true
+  for(var i = 0; i < users.length; i++) {
+    // linesplit = db[i].split(',')
+    // console.log(linesplit)
+    // if(username == linesplit[0] && passHash == linesplit[1]) return true
+    if(username == users[i].username && passHash == users[i].hashedPassword) return true
   }
   return false
 }
 function DoesUserExist (username) {
-  db = fs.readFileSync("database.csv", 'utf8').split('\n')
-  for(var i = 0; i < db.length; i++) {
-    if(username == db[i].split(',')[0]) return true
+  for(var i = 0; i < users.length; i++) {
+    if(username == users[i].username) return true
   }
   return false
 }
@@ -50,13 +57,19 @@ function CreateAccount(req, res) {
       var oldPath = files.pfp.path
       fs.rename(oldPath, newDir + pfpFilename, function (err) {
         if (error) throw error
-        res.end("/home.html")
       });
     } else {
       console.log("Copying " + __dirname + '/example_pfp.jpg' + " to " + (newDir + pfpFilename))
       fs.copyFileSync(__dirname + '/example_pfp.jpg', newDir + pfpFilename)
     }
+    res.end("/home.html")
   });
+}
+function loadUsers() {
+  users = JSON.parse(fs.readFileSync('users.json'))
+}
+function saveUsers() {
+  fs.writeFileSync("users.json", JSON.stringify(users))
 }
 
 // Post handling functions
@@ -126,20 +139,29 @@ function ratePost(id, rating) {
   posts[index].numRatings++
   savePosts()
 }
+function GetAllPostsByUser(username) {
+  postsByUser = ""
+  fs.readdirSync(__dirname + "/posts/" + username + "/").forEach(file => {
+    postsByUser += file.substring(0, file.length-4) + '\n'
+  })
+  return postsByUser
+}
 
 // Libraries, constant variables, other shite
 const http = require('http')
 const fs = require('fs')
 const fm = require('formidable')
 var port = 8000
-posts = Array(0)
 
 // Reassure the user
 console.log("Initialising...")
 
-// Load posts database and create dictionary
+// Load posts database and create dictionary. Do the same for users
+posts = Array(0)
 var postsDict = []
 loadAndAuditPosts()
+users = Array(0)
+loadUsers()
 
 // Server function
 http.createServer( function(req, res) {
@@ -148,6 +170,8 @@ http.createServer( function(req, res) {
 	console.log("request: " + req.url)
 	res.writeHead(200, {'Content-Type': 'text:html'})
   request = sanitise(req.url)
+
+  if(request == "" || req.url == "/") request = "home.html"
 
   if(request == "post") {
     // Initialise upload form
@@ -228,6 +252,12 @@ http.createServer( function(req, res) {
     username = split[1]
     i = Math.floor(Math.random() * posts.length)
     res.end(posts[i].filename.substring(0, posts[i].filename.length - 4))
+  } else
+
+  // Get all post IDs posted by the given username
+  if(request.includes("GetAllPostsByUser")) {
+    // /GetAllPostsByUser/username
+    res.end(GetAllPostsByUser(request.split('/')[1]));
   } else
 
   // Verify account details
