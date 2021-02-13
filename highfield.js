@@ -47,6 +47,10 @@ function DoesUserExist (username) {
 function CreateAccount(req, res) {
   var uploadForm = new fm.IncomingForm()
   uploadForm.parse(req, function (error, fields, files) {
+    if(DoesUserExist(fields.username)) {
+        res.end("failure - user already exists")
+        return
+    }
     AddUser(fields.username, fields.passHash)
     pfpFilename = fields.username + ".jpg"
     var newDir = __dirname + "/pfp/"
