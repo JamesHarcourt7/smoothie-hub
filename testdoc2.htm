@@ -1,6 +1,6 @@
 <head>
   <title>Not sure?</title>
-  </head><br>
+</head>
 <body>
   <h1>Header level 1</h1>
   <p>Text text text</p>
@@ -33,5 +33,17 @@
       <label>Description: </label><input type="text" name="postDescription"><br>
       <label>Ingredients: </label><input type="text" name="postIngredients"><br>
       <input type="submit" value="Upload">
+  </form>
+  <form action="newaccount" method="post" enctype="multipart/form-data">
+      <label>Username: </label><input type="text" name="username"><br>
+      <label>Password: </label><input type="text" id="password"><br>
+      <input type="text" hidden=true name="passHash" id=passHash><br>
+      <label>Profile picture: </label><input type="file" name="pfp"><br>
+      <input id="submitButton" type="submit" value="Create Account">
+      <script>
+        setInterval(function() {
+          document.getElementById("passHash").value = hash(document.getElementById("password").value)
+        }, 10)
+      </script>
   </form>
 </body>

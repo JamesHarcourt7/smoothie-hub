@@ -17,8 +17,8 @@ function sanitise (input) {
 }
 
 // Account handling functions
-function AddUser (username, passHash, pfpPath) {
-  fs.appendFileSync("database.csv", username + "," + passHash + "," + pfpPath + "\n")
+function AddUser (username, passHash) {
+  fs.appendFileSync("database.csv", username + "," + passHash + "\n")
 }
 function CheckUser (username, passHash) {
   db = fs.readFileSync("database.csv", 'utf8').split('\n')
@@ -35,6 +35,23 @@ function DoesUserExist (username) {
     if(username == db[i].split(',')[0]) return true
   }
   return false
+}
+function CreateAccount(req, res) {
+  var uploadForm = new fm.IncomingForm()
+  uploadForm.parse(req, function (error, fields, files) {
+    AddUser(fields.username, fields.passHash)
+    var oldPath = files.pfp.path
+    postFilename = fields.username + ".jpg"
+    var newDir = __dirname + "/pfp/"
+    if(!fs.existsSync(newDir)) {
+      fs.mkdirSync(newDir)
+    }
+    console.log("Moving file to: " + newDir + postFilename)
+    fs.rename(oldPath, newDir + postFilename, function (err) {
+      if (error) throw error
+      res.end("/home.html")
+    });
+  });
 }
 
 // Post handling functions
@@ -132,6 +149,11 @@ http.createServer( function(req, res) {
     return
   } else
 
+  if(request == "newaccount") {
+    CreateAccount(req,res)
+    return
+  } else
+
   // Rating requests
   if(request.includes("rate_post")) {
     // /rate_post/[post id]/rating
@@ -146,6 +168,12 @@ http.createServer( function(req, res) {
     console.log("Finding image \"" + split[1] + "\"")
     post = posts[postsDict[split[1]]]
     fs.createReadStream(__dirname + "/posts/" + post.username + "/" + post.filename).pipe(res)
+  } else
+
+  // Get a user's profile picture
+  if(request.includes("GetPFP")) {
+    split = request.split('/')
+    fs.createReadStream(__dirname + "/pfp/" + split[1] + ".jpg").pipe(res)
   } else
 
   // Get a Description
@@ -196,40 +224,32 @@ http.createServer( function(req, res) {
     res.end(posts[i].filename.substring(0, posts[i].filename.length - 4))
   } else
 
-  // Determine if the request made is for an account
-  if(request.includes("account")) {
-    // Account information requested
-    if(request.includes("create")) {
-      // Create account: /account/create/[username]/[hashed password]
-      split = request.split('/')
-      username = split[2]
-      passHash = split[3]
-      AddUser(username, passHash)
-      res.end("success")
-    }
-    if(request.includes("verify")) {
-      split = request.split('/')
-      username = split[2]
-      passHash = split[3]
-      res.end("" + CheckUser(username, passHash))
-    }
-    if(request.includes("queryexistence")) {
-      res.end("" + DoesUserExist(request.split('/')[2]))
+  // Verify account details
+  if(request.includes("verify")) {
+    split = request.split('/')
+    username = split[2]
+    passHash = split[3]
+    res.end("" + CheckUser(username, passHash))
+  } else
+
+  // Query account existence
+  if(request.includes("queryexistence")) {
+    res.end("" + DoesUserExist(request.split('/')[2]))
+  } else
+
+  // Determine whether to load a file or a resource
+  if(fs.existsSync(request) || fs.existsSync(request + '.htm')) {
+    if(!request.split('/')[0].includes("_files") && !request.includes(".")) {
+      console.log("\t> Serving HTML from request")
+      fs.createReadStream(request + '.htm').pipe(res)
+    } else {
+      console.log("\t> Serving file from request")
+      fs.createReadStream(request).pipe(res)
     }
   } else {
-    // Determine whether to load a file or a resource
-    if(fs.existsSync(request) || fs.existsSync(request + '.htm')) {
-      if(!request.split('/')[0].includes("_files") && !request.includes(".")) {
-        console.log("\t> Serving HTML from request")
-        fs.createReadStream(request + '.htm').pipe(res)
-      } else {
-        console.log("\t> Serving file from request")
-        fs.createReadStream(request).pipe(res)
-      }
-    } else {
-      res.end("404")
-    }
+    res.end("404")
   }
+
   console.log("\t> Response finished")
 }).listen(port);
 
