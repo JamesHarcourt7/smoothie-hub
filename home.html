@@ -1,33 +1,59 @@
 <html>
-        <head>
-                <link rel="stylesheet" href="styles.css">
-                <title>Smoothie Hub</title>
-        </head>
-        <body>
-            <header>
-                <h1>Smoothie Hub
-                    <button onclick="goToProfile()">Profile</button>
-                <script>
-                    function goToProfile() {
-                        window.location.href="/profile.html"
-                    }
-                </script>
-                </h1>
-                
-            </header>
-
-            <div class = post-image>
-                <img src="example_smoothie.png" id=main-smoothie-image>
-            </div>
-            <div class = post-text>
-                <h2>Example Username</h2>
-                <p>Rainbow smoothie!</p>
-                <h3>Ingredients:</h3>
-                <p>- Pain
-                    - Tears of orphans
-                    - Fruit
-                </p>
-            </div>
+    
+    <head>
+            <link rel="stylesheet" href="styles.css">
+            <title>Smoothie Hub</title>
+    </head>
+    <body>
+        <header>
+            <h1>Smoothie Hub
+                <button onclick="goToProfile()">Profile</button>
+            <script>
+                function goToProfile() {
+                    window.location.href="/profile.html"
+                }
+            </script>
+            </h1>
             
-        </body>
+        </header>
+        
+        <div class="flex-container">
+            <img src="example_smoothie.png" id=main-smoothie-image>
+
+            <div class=post>
+                <h2>
+                    <img src="profile-pic-example.PNG" id=pfp>
+                    carlpilot
+                </h2>
+                <p>Rainbow smoothie!</p>
+                
+                <div>
+                    <button class=stars id=1></button>
+                    <button class=stars id=2></button>
+                    <button class=stars id=3></button>
+                    <button class=stars id=4></button>
+                    <button class=stars id=5></button>
+                    <script>
+                        var rating = 3.8
+                        for (i=1; i <= rating; i++) {
+                            document.getElementById(i).style.cssText = "background-color: gold;"
+                        }
+                        var r = (rating % 1) * 100
+                        document.getElementById(Math.floor(rating + 1)).style.cssText = "background: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
+
+                    </script>
+                </div>
+
+                <h3>Ingredients:</h3>
+                <p id=list>- Pain</p>
+                <p id=list>- Tears of orphans</p>
+                <p id=list>- Fruit</p>
+
+                <button>Like</button>
+                <button>Dislike</button>
+
+            </div>
+        </div>
+                    
+    </body>
 </html>

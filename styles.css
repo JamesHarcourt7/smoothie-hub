@@ -11,8 +11,18 @@ h1 {
     color: palevioletred;
 }
 
+h2 {
+    font-size: 40px;
+    color: palevioletred;
+}
+
+h3 {
+    font-size: 32px;
+    color: palevioletred;
+}
+
 p {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .container {
@@ -24,29 +34,54 @@ header {
     text-align: center;
 }
 
+.flex-container {
+    display: flex;
 
-.post-text {
-    margin: 50px;
-    padding: 50px;
-    text-align: center;
-    float: right;
-    clear: both;
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    right: 20%;
+    margin: 0 auto;
     padding: 50px;
     background-color: peachpuff;
 }
 
-.post-image {
-    margin: 50px;
-    position: absolute;
-    text-align: left;
-    float: left;
-    clear: both;
+.post {
+    width: 100%;
+    background-color: peachpuff;
+    margin: 20px;
+    padding: 50px;
+    float: right;
+}
 
+#post-text {
+    float: right;
+    clear: both;
+    text-align: left;
+    margin: 0 auto;
+}
+
+#main-smoothie-image {
+    width: 400px;
     outline-style: groove;
     outline-color: purple;
     outline-width: 10px;
 }
 
-#main-smoothie-image {
-    width: 400px;
+#pfp {
+    width: 32px;
+    height: 32px;
+}
+
+#list {
+    text-align: left;
+}
+
+.stars {
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    width: 16px;
+    height: 16px;
 }
