@@ -17,7 +17,7 @@ h2 {
 }
 
 h3 {
-    font-size: 32px;
+    font-size: 20px;
     color: palevioletred;
 }
 
@@ -39,18 +39,17 @@ header {
 
     position: absolute;
     top: 15%;
-    left: 20%;
-    right: 20%;
+    left: 10%;
+    right: 10%;
     margin: 0 auto;
-    padding: 50px;
+    padding: 40px;
     background-color: peachpuff;
 }
 
 .post {
-    width: 100%;
+    max-width: 45%;
     background-color: peachpuff;
-    margin: 20px;
-    padding: 50px;
+    margin-left: 20px;
     float: right;
 }
 
@@ -62,10 +61,12 @@ header {
 }
 
 #main-smoothie-image {
-    width: 400px;
+    max-width: 100%;
+    height: auto;
     outline-style: groove;
-    outline-color: purple;
+    outline-color:  rgb(192, 53, 99);
     outline-width: 10px;
+    float: left;
 }
 
 #pfp {
@@ -78,10 +79,38 @@ header {
 }
 
 .stars {
+    border: none;
     background-color: white;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    width: 16px;
-    height: 16px;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.optionshite {
+    border: none;
+    background-color: palevioletred;
+    color: peachpuff;
+    font-size: 20px;
+}
+
+.optionshite:hover {
+    background-color: rgb(192, 53, 99);
+}
+
+.username-text {
+    vertical-align: middle;
+}
+
+#title-text {
+    margin: 0px;
+}
+
+#image-holder {
+    max-width: 50%;
+    height: auto;
+}
+
+#separator {
+    width: 5%;
+    height: auto;
 }
