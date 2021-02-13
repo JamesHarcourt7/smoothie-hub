@@ -21,10 +21,10 @@
 
             <div id=login-form>
                 <h3>Returning user, welcome back!</h3>
-                <form action="post" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div id = username-inputbox><input type="text" id="login-username-input" name="username" value="" placeholder="username"><br></div>
                     <div id = password-inputbox><input type="password" id="login-password-input" name="password" value="" placeholder="password"><br></div>
-                    <div id=login-button><input type="submit" value = "Login"></div>
+                    <div id=login-button><input type="submit" value = "Login" onclick="authenticate_login()"></div>
                     <input type="text" hidden=true name=passHash2 id=passHash2><br>
                 </form>
                 <script>
@@ -33,15 +33,13 @@
                     }, 10)
                 </script>
 
-            <div id=login-form-separator></div>
-
             </div>
             <div id=account-create-form>
                 <h3>New to smoothie hub? Register here!</h3>
-                <form action="newaccount" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div id = username-inputbox><input type="text" id="create-username-input" name="username" value="" placeholder="username"><br></div>
                     <div id = password-inputbox><input type="password" id="create-password-input" name="password" value="" placeholder="password"><br></div>
-                    <div id=create-account-button><input type="submit" value = "Create Account"></div>
+                    <div id=create-account-button><input type="submit" value = "Create Account" onclick="authenticate_create()"></div>
                     <input type="text" hidden=true name=passHash id=passHash><br>
 
                 </form>
@@ -49,6 +47,38 @@
                     setInterval(function() {
                       document.getElementById("passHash").value = hash(document.getElementById("create-password-input").value)
                     }, 10)
+                </script>
+
+                <script>
+                    function authenticate_create() {
+                        var user = document.getElementById("create-username-input").value
+                        var hashed = document.getElementById("passHash").value
+                        var xhReq = new XMLHttpRequest();
+                        xhReq.open("GET", "/verify/" + user + "/" + hashed, false);
+                        xhReq.send(null);
+                        var serverResponse = xhReq.responseText;
+                        if (serverResponse == "true") {
+                            document.cookie = "username=" + user
+                        }else {
+                            document.cookie = "username="
+                            alert("Credentials rejected :(")
+                        }
+                    }
+
+                    function authenticate_login() {
+                        var user = document.getElementById("login-username-input").value
+                        var hashed = document.getElementById("passHash2").value
+                        var xhReq = new XMLHttpRequest();
+                        xhReq.open("GET", "/verify/" + user + "/" + hashed, false);
+                        xhReq.send(null);
+                        var serverResponse = xhReq.responseText;
+                        if (serverResponse == "true") {
+                            document.cookie = "username=" + user
+                        }else {
+                            document.cookie = "username="
+                            alert("Credentials rejected :(")
+                        }
+                    }
                 </script>
     
             </div>

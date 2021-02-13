@@ -1,5 +1,6 @@
 body {
-    background-color: palevioletred;
+    background-image: url("/background.png");
+    background-size: 10%;
     color: black;
     resize: both;
     overflow: scroll;
