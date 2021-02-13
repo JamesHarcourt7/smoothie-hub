@@ -141,7 +141,7 @@ function loadAndAuditPosts () {
   console.log(postsDict)
 }
 function ratePost(id, rating) {
-  index = postDict[id]
+  index = postsDict[id]
   posts[index].totalRating += rating
   posts[index].numRatings++
   savePosts()
