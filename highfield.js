@@ -22,6 +22,7 @@ function AddUser (username, passHash) {
 }
 function CheckUser (username, passHash) {
   db = fs.readFileSync("database.csv", 'utf8').split('\n')
+  console.log("Checking \"" + username + "\",\"" + passHash + "\"")
   for(var i = 0; i < db.length; i++) {
     linesplit = db[i].split(',')
     console.log(linesplit)
@@ -40,17 +41,21 @@ function CreateAccount(req, res) {
   var uploadForm = new fm.IncomingForm()
   uploadForm.parse(req, function (error, fields, files) {
     AddUser(fields.username, fields.passHash)
-    var oldPath = files.pfp.path
-    postFilename = fields.username + ".jpg"
+    pfpFilename = fields.username + ".jpg"
     var newDir = __dirname + "/pfp/"
     if(!fs.existsSync(newDir)) {
       fs.mkdirSync(newDir)
     }
-    console.log("Moving file to: " + newDir + postFilename)
-    fs.rename(oldPath, newDir + postFilename, function (err) {
-      if (error) throw error
-      res.end("/home.html")
-    });
+    if(files.pfp != undefined && files.pfp.size > 0) {
+      var oldPath = files.pfp.path
+      fs.rename(oldPath, newDir + pfpFilename, function (err) {
+        if (error) throw error
+        res.end("/home.html")
+      });
+    } else {
+      console.log("Copying " + __dirname + '/example_pfp.jpg' + " to " + (newDir + pfpFilename))
+      fs.copyFileSync(__dirname + '/example_pfp.jpg', newDir + pfpFilename)
+    }
   });
 }
 
@@ -228,8 +233,8 @@ http.createServer( function(req, res) {
   // Verify account details
   if(request.includes("verify")) {
     split = request.split('/')
-    username = split[2]
-    passHash = split[3]
+    username = split[1]
+    passHash = split[2]
     res.end("" + CheckUser(username, passHash))
   } else
 
