@@ -28,6 +28,7 @@ function DoesUserExist (username) {
 // Libraries, constant variables, other shite
 const http = require('http')
 const fs = require('fs')
+const fm = require('formidable')
 var port = 8000
 
 // Reassure the user
@@ -39,6 +40,25 @@ http.createServer( function(req, res) {
 	console.log("request: " + req.url)
 	res.writeHead(200, {'Content-Type': 'text:html'})
   request = sanitise(req.url)
+
+  if(request == "fileupload") {
+    // Initialise upload form
+    var uploadForm = new fm.IncomingForm()
+    uploadForm.parse(req, function (err, fields, files) {
+            // oldpath : temporary folder to which file is saved to
+            var oldpath = files.filetoupload.path;
+
+            var newpath = __dirname + "/posts/" + files.filetoupload.name;
+            // copy the file to a new location
+
+            fs.rename(oldpath, newpath, function (err) {
+                if (err) throw err;
+                // you may respond with another html page
+                res.write('File uploaded and moved!');
+                res.end();
+            });
+        });
+  }
 
   // Determine if the request made is for an account
   if(request.includes("account")) {
