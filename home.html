@@ -64,8 +64,37 @@
                 <h3>Ingredients:</h3>
                 <p id=list></p>
 
-                <button class=optionshite>Like</button>
-                <button class=optionshite>Dislike</button>
+                <button class=optionshite id=like-button onclick="like()">Like</button>
+                <button class=optionshite id=dislike-button onclick="dislike()">Dislike</button>
+
+                <script>
+                    var user = document.cookie.split("=")[1]
+                    if (user == "") {
+                        document.getElementById("like-button").style.display = "none";
+                        document.getElementById("dislike-button").style.display = "none";
+                    }
+                </script>
+
+                <label id=post-id hidden=true></label>
+
+                <script>
+                    function like() {
+                        var id = document.getElementById("post-id").innerHTML
+                        if (id == "") return;
+                        var xhReq = new XMLHttpRequest();
+                        xhReq.open("GET", "/rate_post/" + id + "/5", false);
+                        xhReq.send(null);
+                        var serverResponse = xhReq.responseText;
+                    }
+                    function dislike() {
+                        var id = document.getElementById("post-id").innerHTML
+                        if (id == "") return;
+                        var xhReq = new XMLHttpRequest();
+                        xhReq.open("GET", "/rate_post/" + id + "/0", false);
+                        xhReq.send(null);
+                        var serverResponse = xhReq.responseText;
+                    }
+                </script>
 
                 <script>
                     function ajax() {
@@ -73,6 +102,8 @@
                         xhReq.open("GET", "/SuggestNextPost", false);
                         xhReq.send(null);
                         var id = xhReq.responseText;
+
+                        document.getElementById("post-id").innerHTML = id;
 
                         var xhReq = new XMLHttpRequest();
                         xhReq.open("GET", "/GetTitleFromPost/" + id, false);
@@ -84,7 +115,8 @@
                         xhReq.open("GET", "/GetUserFromPost/" + id, false);
                         xhReq.send(null);
                         var serverResponse = xhReq.responseText;
-                        document.getElementById("username-text").innerHTML = serverResponse;
+                        var usernameFromServer = serverResponse;
+                        document.getElementById("username-text").innerHTML = usernameFromServer;
 
                         var xhReq = new XMLHttpRequest();
                         xhReq.open("GET", "/GetDescFromPost/" + id, false);
@@ -99,7 +131,7 @@
                         document.getElementById("list").innerHTML = serverResponse;
 
                         document.getElementById("main-smoothie-image").src = "/GetImageFromPost/" + id;
-                        document.getElementById("pfp").src = "/GetPFP/testuser";
+                        document.getElementById("pfp").src = "/GetPFP/" + usernameFromServer;
 
                         var xhReq = new XMLHttpRequest();
                         xhReq.open("GET", "/GetRatingFromPost/" + id, false);
