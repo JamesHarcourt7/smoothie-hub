@@ -4,6 +4,11 @@ class Post {
   constructor(username, filename, description)  {
     this.username = username; this.filename = filename; this.description = description
   }
+  totalRating = 0
+  numRatings = 0
+  getRating () {
+    return totalRating / numRatings
+  }
 }
 
 // Input handling functions
@@ -49,6 +54,7 @@ function doesPostExist(username, id) {
 function enregisterPost(username, filename, description) {
   //fs.appendFileSync("posts.csv", username+","+filename+","+description+'\n')
   posts.push(new Post(username, filename, description))
+  postDict[filename] = posts.length - 1
   savePosts()
 }
 function MakePost(req, res) {
@@ -78,12 +84,23 @@ function savePosts() {fs.writeFileSync("posts.json", JSON.stringify(posts))}
 function loadAndAuditPosts () {
   posts = JSON.parse(fs.readFileSync('posts.json'))
   for(var i = 0; i < posts.length; i++) {
-    if(!fs.existsSync('/posts/' + posts[i].username + '/' + posts[i].filename)) {
+    if(!fs.existsSync(__dirname + '/posts/' + posts[i].username + '/' + posts[i].filename)) {
       console.log("Pruning post from " + posts[i].username + ": " + posts[i].filename)
+      console.log(__dirname + '/posts/' + posts[i].username + '/' + posts[i].filename)
       posts[i] = undefined
     }
   }
-  posts = posts.filter(function(item){item != undefined})
+  posts = posts.filter(function(item){return item != undefined})
+  savePosts()
+  for(var i = 0; i < posts.length; i++) {
+    postsDict[posts[i].filename.substring(0, posts[i].filename.length - 4)] = i
+  }
+  console.log(postsDict)
+}
+function ratePost(id, rating) {
+  index = postDict[id]
+  posts[index].totalRating += rating
+  posts[index].numRatings++
   savePosts()
 }
 
@@ -97,7 +114,8 @@ posts = Array(0)
 // Reassure the user
 console.log("Initialising...")
 
-// Load posts database
+// Load posts database and create dictionary
+var postsDict = []
 loadAndAuditPosts()
 
 // Server function
@@ -111,6 +129,13 @@ http.createServer( function(req, res) {
     // Initialise upload form
     MakePost(req, res);
     return
+  }
+
+  // Rating requests
+  if(request.includes("rate_post")) {
+    // /rate_post/[post id]/rating
+    split = request.split('/')
+    ratePost(split[1], parseInt(split[2]))
   }
 
   // Determine if the request made is for an account
