@@ -145,6 +145,7 @@ function ratePost(id, rating) {
   posts[index].totalRating += rating
   posts[index].numRatings++
   savePosts()
+  res.end("post rated")
 }
 function GetAllPostsByUser(username) {
   postsByUser = ""
