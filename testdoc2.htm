@@ -25,8 +25,10 @@
     }
   </script>
   <script src="/hashPassword.js"></script>
-  <form action="fileupload" method="post" enctype="multipart/form-data">
-        <input type="file" name="filetoupload">
-        <input type="submit" value="Upload">
+  <p>--</p>
+  <form action="post" method="post" enctype="multipart/form-data">
+      <label>Image: </label><input type="file" name="postImage"><br>
+      <label>Description: </label><input type="text" name="postDescription"><br>
+      <input type="submit" value="Upload">
   </form>
 </body>
