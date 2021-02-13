@@ -37,19 +37,16 @@ header {
 
 .post-image {
     margin: 50px;
-    padding: 50px;
     position: absolute;
-    max-width: 400px;
     text-align: left;
     float: left;
     clear: both;
-    padding: 50px;
 
     outline-style: groove;
     outline-color: purple;
     outline-width: 10px;
 }
 
-article, aside {
-    display: inline-block;
+#main-smoothie-image {
+    width: 400px;
 }

@@ -5,13 +5,21 @@
         </head>
         <body>
             <header>
-                <h1>Smoothie Hub</h1>
+                <h1>Smoothie Hub
+                    <button onclick="goToProfile()">Profile</button>
+                <script>
+                    function goToProfile() {
+                        window.location.href="/profile.html"
+                    }
+                </script>
+                </h1>
+                
             </header>
 
-            <article class = post-image>
-                <img src="example_smoothie.png">
-            </article>
-            <article class = post-text>
+            <div class = post-image>
+                <img src="example_smoothie.png" id=main-smoothie-image>
+            </div>
+            <div class = post-text>
                 <h2>Example Username</h2>
                 <p>Rainbow smoothie!</p>
                 <h3>Ingredients:</h3>
@@ -19,7 +27,7 @@
                     - Tears of orphans
                     - Fruit
                 </p>
-            </article>
+            </div>
             
         </body>
 </html>
