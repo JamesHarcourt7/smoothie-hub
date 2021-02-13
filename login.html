@@ -16,18 +16,41 @@
     </header>
     <body>
         <div class="flex-container">
-            <div id=login-form>
 
-                <form action="smoothlogin()" method="post">
-                    <div id = username-inputbox><input type="text" id="username-input" name="username" value="" placeholder="username"><br></div>
-                    <div id = password-inputbox><input type="text" id="password-input" name="password" value="" placeholder="password"><br></div>
-                    <input type="submit" value="Submit">
+            <script src="/hashPassword.js"></script>
+
+            <div id=login-form>
+                <h3>Returning user, welcome back!</h3>
+                <form action="post" method="post" enctype="multipart/form-data">
+                    <div id = username-inputbox><input type="text" id="login-username-input" name="username" value="" placeholder="username"><br></div>
+                    <div id = password-inputbox><input type="password" id="login-password-input" name="password" value="" placeholder="password"><br></div>
+                    <div id=login-button><input type="submit" value = "Login"></div>
+                    <input type="text" hidden=true name=passHash2 id=passHash2><br>
                 </form>
                 <script>
-                    function smoothlogin() {
-
-                    }
+                    setInterval(function() {
+                      document.getElementById("passHash2").value = hash(document.getElementById("login-password-input").value)
+                    }, 10)
                 </script>
+
+            <div id=login-form-separator></div>
+
+            </div>
+            <div id=account-create-form>
+                <h3>New to smoothie hub? Register here!</h3>
+                <form action="newaccount" method="post" enctype="multipart/form-data">
+                    <div id = username-inputbox><input type="text" id="create-username-input" name="username" value="" placeholder="username"><br></div>
+                    <div id = password-inputbox><input type="password" id="create-password-input" name="password" value="" placeholder="password"><br></div>
+                    <div id=create-account-button><input type="submit" value = "Create Account"></div>
+                    <input type="text" hidden=true name=passHash id=passHash><br>
+
+                </form>
+                <script>
+                    setInterval(function() {
+                      document.getElementById("passHash").value = hash(document.getElementById("create-password-input").value)
+                    }, 10)
+                </script>
+    
             </div>
         </div>
     </body>
