@@ -1,8 +1,8 @@
 
 // Classes
 class Post {
-  constructor(username, filename, description)  {
-    this.username = username; this.filename = filename; this.description = description
+  constructor(username, filename, description, ingredients)  {
+    this.username = username; this.filename = filename; this.description = description; this.ingredients = ingredients
   }
   totalRating = 0
   numRatings = 0
@@ -51,10 +51,10 @@ function generatePostId(username) {
 function doesPostExist(username, id) {
   return fs.existsSync('/posts/'+username+'/'+id+'.jpg')
 }
-function enregisterPost(username, filename, description) {
+function enregisterPost(username, filename, description, ingredients) {
   //fs.appendFileSync("posts.csv", username+","+filename+","+description+'\n')
-  posts.push(new Post(username, filename, description))
-  postDict[filename] = posts.length - 1
+  posts.push(new Post(username, filename, description, ingredients))
+  postsDict[filename] = posts.length - 1
   savePosts()
 }
 function MakePost(req, res) {
@@ -76,7 +76,7 @@ function MakePost(req, res) {
       res.write('<a href=\'/home.html\'>Back to home</a>')
       res.end()
       //console.log(fields)
-      enregisterPost("testuser", postFilename, '\"' + fields.postDescription + '\"')
+      enregisterPost("testuser", postFilename, '\"' + fields.postDescription + '\"', fields.postIngredients)
     });
   });
 }
@@ -120,6 +120,7 @@ loadAndAuditPosts()
 
 // Server function
 http.createServer( function(req, res) {
+  // console.log(req)
 	var request = req.url.substring(1)
 	console.log("request: " + req.url)
 	res.writeHead(200, {'Content-Type': 'text:html'})
@@ -129,14 +130,48 @@ http.createServer( function(req, res) {
     // Initialise upload form
     MakePost(req, res);
     return
-  }
+  } else
 
   // Rating requests
   if(request.includes("rate_post")) {
     // /rate_post/[post id]/rating
     split = request.split('/')
     ratePost(split[1], parseInt(split[2]))
-  }
+  } else
+
+  // Getting an Image
+  if(request.includes("GetImageFromPost")) {
+    // /GetImageFromPost/[post id]
+    split = request.split('/')
+    console.log("Finding image \"" + split[1] + "\"")
+    post = posts[postsDict[split[1]]]
+    fs.createReadStream(__dirname + "/posts/" + post.username + "/" + post.filename).pipe(res)
+  } else
+
+  // Get a Description
+  if(request.includes("GetDescFromPost")) {
+    // /GetDescFromPost/[post id]
+    split = request.split('/')
+    post = posts[postsDict[split[1]]]
+    res.end(post.description)
+  } else
+
+  // Get an ingredient list
+  if(request.includes("GetIngrFromPost")) {
+    // /GetDescFromPost/[post id]
+    split = request.split('/')
+    post = posts[postsDict[split[1]]]
+    res.end(post.ingredients)
+  } else
+
+  // Suggesting a post
+  if(request.includes("SuggestNextPost")) {
+    // /SuggestNextPost/[username]
+    split = request.split('/')
+    username = split[1]
+    i = Math.floor(Math.random() * posts.length)
+    res.end(posts[i].filename.substring(0, posts[i].filename.length - 4))
+  } else
 
   // Determine if the request made is for an account
   if(request.includes("account")) {
