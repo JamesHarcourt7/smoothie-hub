@@ -15,6 +15,18 @@
         </h1>
     </header>
     <body>
-
+      <div class='flex-container'>
+        <div id='login-form'>
+          <form action="post" method="post" enctype="multipart/form-data">
+              <label>Image: </label><input type="file" name="postImage"><br><br>
+              <label><b>Title: </b></label><input type="text" name="postTitle"><br><br>
+              <label>Description: </label><input type="text" name="postDescription"><br><br>
+              <label>Ingredients: </label><input type="text" name="postIngredients"><br><br>
+              <input id="usernameBox" name="username", hidden=true>
+              <input type="submit" value="Upload">
+              <script src="/hiddenUsernameBox.js"></script>
+          </form>
+        </div>
+      </div>
     </body>
 </html>
