@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>Login</title>
+    </head>
+    <header>
+        <h1>
+            Login
+            <span><button class=optionshite onclick="goToHome()">Home</button></span>
+            <script>
+                function goToHome() {
+                    window.location.href = "/home.html"
+                }
+            </script>
+        </h1>
+    </header>
+    <body>
+        <div class="flex-container">
+            <div id=login-form>
+
+                <form action="smoothlogin()" method="post">
+                    <div id = username-inputbox><input type="text" id="username-input" name="username" value="" placeholder="username"><br></div>
+                    <div id = password-inputbox><input type="text" id="password-input" name="password" value="" placeholder="password"><br></div>
+                    <input type="submit" value="Submit">
+                </form>
+                <script>
+                    function smoothlogin() {
+
+                    }
+                </script>
+            </div>
+        </div>
+    </body>
+</html>

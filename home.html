@@ -8,14 +8,20 @@
     <body>
         <header>
             <h1>Smoothie Hub
-                <span><button class=optionshite>Login</button></span>
+                <span><button class=optionshite onclick="goToLogin()">Login</button></span>
                 <span><button class=optionshite onclick="goToProfile()">Profile</button></span>
-                <span><button class=optionshite>Create Post</button></span>
-            <script>
-                function goToProfile() {
-                    window.location.href="/profile.html"
-                }
-            </script>
+                <span><button class=optionshite onclick="goToCreatePost()">Create Post</button></span>
+                <script>
+                    function goToProfile() {
+                        window.location.href="/profile.html"
+                    }
+                    function goToCreatePost() {
+                        window.location.href="/createpost.html"
+                    }
+                    function goToLogin() {
+                        window.location.href="/login.html"
+                    }
+                </script>
             </h1>
             
         </header>
@@ -26,7 +32,7 @@
             <div class=post>
                 <h2 id=title-text></h2>
                 <p>
-                    <embed src="" id=pfp>
+                    <img src="" id=pfp>
                     <span id=username-text></span>
                 </p>
                 
@@ -36,15 +42,6 @@
                     <span class=stars id=3><i class="fa fa-star"></i></span>
                     <span class=stars id=4><i class="fa fa-star"></i></span>
                     <span class=stars id=5><i class="fa fa-star"></i></span>
-                    <script>
-                        var rating = 3.5
-                        for (i=1; i <= rating; i++) {
-                            document.getElementById(i).style.cssText = "background-color: gold;"
-                        }
-                        var r = (rating % 1) * 100
-                        document.getElementById(Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
-
-                    </script>
                 </div>
 
                 <h3>Description:</h3>
@@ -59,32 +56,51 @@
                 <script>
                     function ajax() {
                         var xhReq = new XMLHttpRequest();
-                        xhReq.open("GET", "/GetTitleFromPost/testuserGINAF38", false);
+                        xhReq.open("GET", "/SuggestNextPost", false);
+                        xhReq.send(null);
+                        var id = xhReq.responseText;
+
+                        var xhReq = new XMLHttpRequest();
+                        xhReq.open("GET", "/GetTitleFromPost/" + id, false);
                         xhReq.send(null);
                         var serverResponse = xhReq.responseText;
                         document.getElementById("title-text").innerHTML = serverResponse;
 
                         var xhReq = new XMLHttpRequest();
-                        xhReq.open("GET", "/GetUserFromPost/testuserGINAF38", false);
+                        xhReq.open("GET", "/GetUserFromPost/" + id, false);
                         xhReq.send(null);
                         var serverResponse = xhReq.responseText;
                         document.getElementById("username-text").innerHTML = serverResponse;
 
                         var xhReq = new XMLHttpRequest();
-                        xhReq.open("GET", "/GetDescFromPost/testuserGINAF38", false);
+                        xhReq.open("GET", "/GetDescFromPost/" + id, false);
                         xhReq.send(null);
                         var serverResponse = xhReq.responseText;
                         document.getElementById("description-text").innerHTML = serverResponse;
                     
                         var xhReq = new XMLHttpRequest();
-                        xhReq.open("GET", "/GetIngrFromPost/testuserGINAF38", false);
+                        xhReq.open("GET", "/GetIngrFromPost/" + id, false);
                         xhReq.send(null);
                         var serverResponse = xhReq.responseText;
                         document.getElementById("list").innerHTML = serverResponse;
 
-                        document.getElementById("main-smoothie-image").src = "/GetImageFromPost/testuserGINAF38";
+                        document.getElementById("main-smoothie-image").src = "/GetImageFromPost/" + id;
+                        document.getElementById("pfp").src = "/GetPFP/testuser";
+
+                        var xhReq = new XMLHttpRequest();
+                        xhReq.open("GET", "/GetRatingFromPost/" + id, false);
+                        xhReq.send(null);
+                        var serverResponse = xhReq.responseText;
+                        var rating = serverResponse;
+                        for (i=1; i <= rating; i++) {
+                            document.getElementById(i).style.cssText = "background-color: gold;"
+                        }
+                        var r = (rating % 1) * 100
+                        document.getElementById(Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
+
                     }
                     ajax()
+
                 </script>
 
             </div>
