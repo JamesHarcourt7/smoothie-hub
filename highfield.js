@@ -7,7 +7,8 @@ class Post {
   totalRating = 0
   numRatings = 0
   getRating () {
-    return totalRating / numRatings
+    if(this.numRatings == 0) return 0
+    return this.totalRating / this.numRatings
   }
 }
 class User {
@@ -66,7 +67,7 @@ function CreateAccount(req, res) {
       console.log("Copying " + __dirname + '/example_pfp.jpg' + " to " + (newDir + pfpFilename))
       fs.copyFileSync(__dirname + '/example_pfp.jpg', newDir + pfpFilename)
     }
-    res.writeHead(302, {'Location': '/home.html'});
+    res.writeHead(302, {'Location': '/login.html'});
     res.end();
   });
 }
@@ -135,6 +136,7 @@ function loadAndAuditPosts () {
   savePosts()
   for(var i = 0; i < posts.length; i++) {
     postsDict[posts[i].filename.substring(0, posts[i].filename.length - 4)] = i
+    posts[i] = new Post(posts[i].username, posts[i].filename, posts[i].description, posts[i].ingredients, posts[i].title)
   }
   console.log(postsDict)
 }
@@ -241,6 +243,15 @@ http.createServer( function(req, res) {
     split = request.split('/')
     post = posts[postsDict[split[1]]]
     res.end(post.username)
+  } else
+
+  // Get user
+  if(request.includes("GetRatingFromPost")) {
+    // /GetDescFromPost/[post id]
+    split = request.split('/')
+    post = posts[postsDict[split[1]]]
+    console.log("rating" + post.getRating() + "b")
+    res.end("" + post.getRating())
   } else
 
   // Full post information
