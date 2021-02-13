@@ -132,3 +132,7 @@ header {
     width: 10%;
     height: auto;
 }
+
+.loginInputFormShite {
+  padding: 20px;
+}
