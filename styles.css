@@ -114,3 +114,23 @@ header {
     width: 5%;
     height: auto;
 }
+
+#login-form {
+    max-width: 45%;
+    background-color: peachpuff;
+    margin-left: 20px;
+    float: right;
+}
+
+#username-inputbox, #password-inputbox {
+    padding: 10px;
+    text-align: center;
+}
+
+#login-form {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    right: 10%;
+    margin: 0 auto;
+}
