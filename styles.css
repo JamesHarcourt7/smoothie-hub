@@ -133,6 +133,19 @@ header {
     height: auto;
 }
 
+<<<<<<< HEAD
+#profile-picture {
+    width: 256px;
+    height: 256px;
+}
+
+#profile-username {
+    max-width: 50%;
+    padding: 20px;
+    text-align: center;
+    float: right;
+=======
 .loginInputFormShite {
   padding: 20px;
+>>>>>>> 08dd17919c6864360b36206eff7fff6fe3cead26
 }
