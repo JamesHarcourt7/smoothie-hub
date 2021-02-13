@@ -17,8 +17,8 @@ function sanitise (input) {
 }
 
 // Account handling functions
-function AddUser (username, passHash) {
-  fs.appendFileSync("database.csv", username + "," + passHash + "\n")
+function AddUser (username, passHash, pfpPath) {
+  fs.appendFileSync("database.csv", username + "," + passHash + "," + pfpPath + "\n")
 }
 function CheckUser (username, passHash) {
   db = fs.readFileSync("database.csv", 'utf8').split('\n')
@@ -170,6 +170,14 @@ http.createServer( function(req, res) {
     split = request.split('/')
     post = posts[postsDict[split[1]]]
     res.end(post.title)
+  } else
+
+  // Get user
+  if(request.includes("GetUserFromPost")) {
+    // /GetDescFromPost/[post id]
+    split = request.split('/')
+    post = posts[postsDict[split[1]]]
+    res.end(post.username)
   } else
 
   // Full post information
