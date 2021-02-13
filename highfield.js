@@ -48,7 +48,7 @@ function CreateAccount(req, res) {
   var uploadForm = new fm.IncomingForm()
   uploadForm.parse(req, function (error, fields, files) {
     if(DoesUserExist(fields.username)) {
-        res.end("failure - user already exists")
+        res.end("<h1><b>failure - user already exists</b></h1>")
         return
     }
     AddUser(fields.username, fields.passHash)
@@ -66,7 +66,8 @@ function CreateAccount(req, res) {
       console.log("Copying " + __dirname + '/example_pfp.jpg' + " to " + (newDir + pfpFilename))
       fs.copyFileSync(__dirname + '/example_pfp.jpg', newDir + pfpFilename)
     }
-    res.end("/home.html")
+    res.writeHead(302, {'Location': '/home.html'});
+    res.end();
   });
 }
 function loadUsers() {
