@@ -140,7 +140,7 @@ function loadAndAuditPosts () {
   }
   console.log(postsDict)
 }
-function ratePost(id, rating) {
+function ratePost(id, rating, res) {
   index = postsDict[id]
   posts[index].totalRating += rating
   posts[index].numRatings++
@@ -196,7 +196,7 @@ http.createServer( function(req, res) {
   if(request.includes("rate_post")) {
     // /rate_post/[post id]/rating
     split = request.split('/')
-    ratePost(split[1], parseInt(split[2]))
+    ratePost(split[1], parseInt(split[2]), res)
   } else
 
   // Getting an Image
