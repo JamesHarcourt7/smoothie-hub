@@ -39,7 +39,7 @@
                 <form action="newaccount" method="post" enctype="multipart/form-data">
                     <div id = username-inputbox><input type="text" id="create-username-input" name="username" value="" placeholder="username"><br></div>
                     <div id = password-inputbox><input type="password" id="create-password-input" name="password" value="" placeholder="password"><br></div>
-                    <div id=create-account-button><input type="submit" value = "Create Account"></div>
+                    <div id=create-account-button><input type="submit" value = "Create Account" onclick="finish_creation()"></div>
                     <input type="text" hidden=true name=passHash id=passHash><br>
 
                 </form>
@@ -50,7 +50,6 @@
                 </script>
 
                 <script>
-
                     function authenticate_login() {
                         var user = document.getElementById("login-username-input").value
                         var hashed = document.getElementById("passHash2").value
@@ -60,11 +59,13 @@
                         var serverResponse = xhReq.responseText;
                         if (serverResponse == "true") {
                             document.cookie = "username=" + user
+                            window.location.href = "/home.html"
                         }else {
                             document.cookie = "username="
                             alert("Credentials rejected :(")
                         }
                     }
+                    
                 </script>
     
             </div>

@@ -16,9 +16,11 @@
     </header>
     <body>
         <div class="flex-container">
-            <div>
-                
-            </div>
+            <img src="" id=profile-picture>
+            <script>
+                var user = document.cookie.split("=")[1]
+                document.getElementById("profile-picture").src = "/GetPFP/" + user
+            </script>
         </div>
     </body>
 </html>

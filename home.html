@@ -8,9 +8,10 @@
     <body>
         <header>
             <h1>Smoothie Hub
-                <span><button class=optionshite onclick="goToLogin()">Login</button></span>
-                <span><button class=optionshite onclick="goToProfile()">Profile</button></span>
-                <span><button class=optionshite onclick="goToCreatePost()">Create Post</button></span>
+                <span><button class=optionshite id=home-login-button onclick="goToLogin()">Login</button></span>
+                <span><button class=optionshite id=home-profile-button onclick="goToProfile()">Profile</button></span>
+                <span><button class=optionshite id=home-create-button onclick="goToCreatePost()">Create Post</button></span>
+                <span><button class=optionshite id=home-logout-button onclick="logout()">Log Out</button></span>
                 <script>
                     function goToProfile() {
                         window.location.href="/profile.html"
@@ -21,6 +22,19 @@
                     function goToLogin() {
                         window.location.href="/login.html"
                     }
+                    function logout() {
+                        document.cookie = "username="
+                        window.location.href = "/home.html"
+                    }
+                    var user = document.cookie.split("=")[1]
+                    if (user == "") {
+                        document.getElementById("home-profile-button").style.display = "none";
+                        document.getElementById("home-create-button").style.display = "none";
+                        document.getElementById("home-logout-button").style.display = "none";
+                    } else {
+                        document.getElementById("home-login-button").style.display = "none";
+                    }
+
                 </script>
             </h1>
             
