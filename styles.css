@@ -132,3 +132,15 @@ header {
     width: 10%;
     height: auto;
 }
+
+#profile-picture {
+    width: 256px;
+    height: 256px;
+}
+
+#profile-username {
+    max-width: 50%;
+    padding: 20px;
+    text-align: center;
+    float: right;
+}

@@ -17,10 +17,13 @@
     <body>
         <div class="flex-container">
             <img src="" id=profile-picture>
+            <span><h1 id=profile-username></h1></span>
             <script>
                 var user = document.cookie.split("=")[1]
                 document.getElementById("profile-picture").src = "/GetPFP/" + user
+                document.getElementById("profile-username").innerHTML = user
             </script>
+
         </div>
     </body>
 </html>
