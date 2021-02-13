@@ -25,7 +25,7 @@ function sanitise (input) {
 // Account handling functions
 function AddUser (username, passHash) {
   //fs.appendFileSync("database.csv", username + "," + passHash + "\n")
-  users.push(new User(username, passHash, "I'm not human enough to have a bio"))
+  users.push(new User(username, passHash, ""))
   saveUsers()
 }
 function CheckUser (username, passHash) {
