@@ -24,7 +24,7 @@
                 <form action="" method="post" enctype="multipart/form-data">
                     <div id = username-inputbox><input type="text" id="login-username-input" name="username" value="" placeholder="username"><br></div>
                     <div id = password-inputbox><input type="password" id="login-password-input" name="password" value="" placeholder="password"><br></div>
-                    <div id=login-button><input type="submit" value = "Login" onclick="authenticate_login()"></div>
+                    <div id=login-button><input type="button" value = "Login" onclick="authenticate_login()"></div>
                     <input type="text" hidden=true name=passHash2 id=passHash2><br>
                 </form>
                 <script>
@@ -57,17 +57,22 @@
                         xhReq.open("GET", "/verify/" + user + "/" + hashed, false);
                         xhReq.send(null);
                         var serverResponse = xhReq.responseText;
+                        console.log(serverResponse)
                         if (serverResponse == "true") {
+                            console.log("Credentials accepted")
+                            console.log(window.location.href)
                             document.cookie = "username=" + user
-                            window.location.href = "/home.html"
+                            //window.location.href = "home.html"
+                            window.location.replace("/home.html")
+                            return
                         }else {
                             document.cookie = "username="
                             alert("Credentials rejected :(")
                         }
                     }
-                    
+
                 </script>
-    
+
             </div>
         </div>
     </body>
