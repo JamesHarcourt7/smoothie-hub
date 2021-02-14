@@ -17,6 +17,7 @@
             </script>
           </div>
             <h1>Smoothie Hub
+                <span><button class=optionshite id=home-search-button onclick="goToSearch()">Search</button></span>
                 <span><button class=optionshite id=home-login-button onclick="goToLogin()">Login</button></span>
                 <span><button class=optionshite id=home-profile-button onclick="goToProfile()">Profile</button></span>
                 <span><button class=optionshite id=home-create-button onclick="goToCreatePost()">Create Post</button></span>
@@ -33,6 +34,9 @@
                     }
                     function goToLogin() {
                         window.location.href="/login.html"
+                    }
+                    function goToSearch() {
+                        window.location.href="/search.html"
                     }
                     function logout() {
                         document.cookie = "username="

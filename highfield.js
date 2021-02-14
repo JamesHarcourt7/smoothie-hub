@@ -260,6 +260,18 @@ function GetLikedPostsByUser(username) {
   }
   return likedPostsByUser
 }
+function SearchAllPosts (searchTerm) {
+  out = ""
+  st = searchTerm.toUpperCase()
+  for(var i = 0; i < posts.length; i++) {
+    if(posts[i].title.toUpperCase().includes(st)
+      || posts[i].description.toUpperCase().includes(st)
+      || posts[i].ingredients.toUpperCase().includes(st)) {
+      out += posts[i].id + '\n'
+    }
+  }
+  return out
+}
 
 // Libraries, constant variables, other shite
 const http = require('http')
@@ -426,6 +438,11 @@ http.createServer( function(req, res) {
   if(request.includes("GetAllPostsByUser")) {
     // /GetAllPostsByUser/username
     res.end(GetAllPostsByUser(request.split('/')[1]));
+  } else
+
+  if(request.includes("SearchAllPosts")) {
+    // /SearchAllPosts/[search term]
+    res.end(SearchAllPosts(request.split('/')[1]))
   } else
 
   // Verify account details

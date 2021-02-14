@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>Search</title>
+    </head>
+    <header>
+        <h1>
+            Search
+            <span><button class=optionshite onclick="goToHome()">Home</button></span>
+            <script>
+                function goToHome() {
+                    window.location.href = "/home.html"
+                }
+            </script>
+        </h1>
+    </header>
+    <body>
+        <div class="flex-container">
+            <form action="" method="post" enctype="multipart/form-data" style="margin:0 auto;">
+                <div><input type="text" oninput="updateSearchResults()" id="searchTerm" name="searchTerm" value="" placeholder="Enter your search term..." size=40% style="line-height:60px;font-size:60px"><br></div>
+            </form>
+            <script>
+              function updateSearchResults() {
+                // Fetch new search results from the server and display them here
+                // console.log("New search results would be fetched now.")
+                var xhReq = new XMLHttpRequest();
+                searchTerm = document.getElementById("searchTerm").value
+                xhReq.open("GET", "/SearchAllPosts/" + searchTerm, false);
+                xhReq.send(null);
+                var serverResponse = xhReq.responseText;
+                console.log(searchTerm + ": Server responded " + serverResponse)
+              }
+            </script>
+        </div>
+    </body>
+</html>
