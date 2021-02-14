@@ -37,6 +37,27 @@ class User {
 function sanitise (input) {
   return decodeURI(input.substring(1))
 }
+function CheckUserInput (input) {
+  if(Array.isArray(input)) {
+    out = new Array(0)
+    for(var i = 0; i < input.length; i++) {
+      out.push(CheckItem(input))
+    }
+    return out
+  } else {
+    return CheckItem(input)
+  }
+}
+function CheckItem(input) {return CheckItem(input, 5000)}
+checkAllowed = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890,._-:£><=!()[]& "
+function CheckItem (input, length) {
+  if(input == undefined) return input
+  if(input.length > length) return input.substring(0, length)
+  for(var i = 0; i < input.length; i++) {
+    if(!checkAllowed.includes(input[i])) input = input.replace(input[i], " ")
+  }
+  return input
+}
 
 // Account handling functions
 function AddUser (username, passHash) {
@@ -64,6 +85,9 @@ function DoesUserExist (username) {
 function CreateAccount(req, res) {
   var uploadForm = new fm.IncomingForm()
   uploadForm.parse(req, function (error, fields, files) {
+
+    fields.username = CheckUserInput(fields.username)
+
     if(DoesUserExist(fields.username)) {
         res.end("<h1><b>failure - user already exists</b></h1>")
         return
@@ -126,6 +150,12 @@ function enregisterPost(username, filename, description, ingredients, title) {
 function MakePost(req, res) {
   var uploadForm = new fm.IncomingForm()
   uploadForm.parse(req, function (error, fields, files) {
+
+    fields.username = CheckUserInput(fields.username)
+    fields.postDescription = CheckUserInput(fields.postDescription)
+    fields.postIngredients = CheckUserInput(fields.postIngredients)
+    fields.postTitle = CheckUserInput(fields.postTitle)
+
     var oldPath = files.postImage.path
     var username = fields.username
     postFilename = username + generatePostId(username) + ".jpg"
@@ -277,6 +307,13 @@ http.createServer( function(req, res) {
 
   if(request.includes("GetUserBio")) {
     res.end(users[getUserIndex(request.split('/')[1])].bio)
+  } else
+
+  if(request.includes("UpdateBio/")) {
+    // /UpdateBio/[username]/[new bio]
+    split = request.split('/')
+    users[getUserIndex(split[1])].bio = CheckUserInput(split[2])
+    res.end("set")
   } else
 
   // Get a Description
