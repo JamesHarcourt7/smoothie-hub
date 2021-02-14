@@ -236,6 +236,13 @@ http.createServer( function(req, res) {
     ratePost(split[1], parseInt(split[2]), split[3], res)
   } else
 
+  // Profile pages
+  if(request.includes("profile?")) {
+    // /profile/[username]
+    fs.createReadStream(__dirname + "/user-page.html").pipe(res)
+    if(!DoesUserExist(request.split('?')[1])) res.end("No such user account")
+  } else
+
   // Getting an Image
   if(request.includes("GetImageFromPost")) {
     // /GetImageFromPost/[post id]
@@ -248,6 +255,10 @@ http.createServer( function(req, res) {
   // Get a user's profile picture
   if(request.includes("GetPFP")) {
     split = request.split('/')
+    if(!fs.existsSync(__dirname + "/pfp/" + split[1] + ".jpg")){
+      res.end("No such file")
+      return
+    }
     fs.createReadStream(__dirname + "/pfp/" + split[1] + ".jpg").pipe(res)
   } else
 
@@ -334,6 +345,10 @@ http.createServer( function(req, res) {
       fs.createReadStream(request + '.htm').pipe(res)
     } else {
       console.log("\t> Serving file from request")
+      if(!fs.existsSync(request)) {
+        res.end("No such file")
+        return
+      }
       fs.createReadStream(request).pipe(res)
     }
   } else {
