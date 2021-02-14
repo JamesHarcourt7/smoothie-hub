@@ -63,7 +63,7 @@ header {
 
 #main-smoothie-image {
     max-width: 100%;
-    height: auto;
+    height: 500px;
     outline-style: groove;
     outline-color:  rgb(192, 53, 99);
     outline-width: 10px;

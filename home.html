@@ -1,5 +1,5 @@
 <html>
-    
+
     <head>
             <link rel="stylesheet" href="styles.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -40,9 +40,9 @@
 
                 </script>
             </h1>
-            
+
         </header>
-        
+
         <div class="flex-container">
             <div id = image-holder><img src="" id=main-smoothie-image></div>
             <span id = separator></span>
@@ -52,7 +52,7 @@
                     <img src="" id=pfp>
                     <a id=user-link href=""><span id=username-text></span></a>
                 </p>
-                
+
                 <div>
                     <span class=stars id=1><i class="fa fa-star"></i></span>
                     <span class=stars id=2><i class="fa fa-star"></i></span>
@@ -107,7 +107,7 @@
                         xhReq.send(null);
                         var serverResponse = xhReq.responseText;
                         var rating = serverResponse;
-                        
+
                         for (i=1; i <= 5; i++) {
                             document.getElementById(i).style.cssText = "background-color: white"
                         }
@@ -125,7 +125,7 @@
                 <script>
                     function ajax() {
                         var xhReq = new XMLHttpRequest();
-                        xhReq.open("GET", "/SuggestNextPost", false);
+                        xhReq.open("GET", "/SuggestNextPost/" + document.cookie.split("=")[1], false);
                         xhReq.send(null);
                         var id = xhReq.responseText;
 
@@ -150,7 +150,7 @@
                         xhReq.send(null);
                         var serverResponse = xhReq.responseText;
                         document.getElementById("description-text").innerHTML = serverResponse;
-                    
+
                         var xhReq = new XMLHttpRequest();
                         xhReq.open("GET", "/GetIngrFromPost/" + id, false);
                         xhReq.send(null);
@@ -180,7 +180,14 @@
                 </script>
 
             </div>
+            <div style="display:flex;background-color:peachpuff;position:absolute;left:0px;right:0px;top:101%;padding:10px;">
+              <button type="button" onclick="refresh()" style="margin:0 auto;display:block;width: 100%;border:none;background-color:palevioletred;padding:14px 28px;font-size: 16px;color:white;font-weight:bold;">Next Post</button>
+              <script>
+                function refresh(){
+                  window.location.reload()
+                }
+              </script>
+            </div>
         </div>
-                    
     </body>
 </html>
