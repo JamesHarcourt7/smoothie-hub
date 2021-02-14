@@ -1,6 +1,7 @@
 <html>
     <template id=post-template>
-        <div id = image-holder><img src="" id=main-smoothie-image></div>
+        <div id=jesustakethewheel>
+            <img src="" id=main-smoothie-image>
             <span id = separator></span>
             <div class=post>
                 <h2 id=title-text></h2>
@@ -10,11 +11,11 @@
                 </p>
                 
                 <div>
-                    <span class=stars id=1><i class="fa fa-star"></i></span>
-                    <span class=stars id=2><i class="fa fa-star"></i></span>
-                    <span class=stars id=3><i class="fa fa-star"></i></span>
-                    <span class=stars id=4><i class="fa fa-star"></i></span>
-                    <span class=stars id=5><i class="fa fa-star"></i></span>
+                    <span class=stars id=star1><i class="fa fa-star"></i></span>
+                    <span class=stars id=star2><i class="fa fa-star"></i></span>
+                    <span class=stars id=star3><i class="fa fa-star"></i></span>
+                    <span class=stars id=star4><i class="fa fa-star"></i></span>
+                    <span class=stars id=star5><i class="fa fa-star"></i></span>
                 </div>
     
                 <h3>Description:</h3>
@@ -41,7 +42,7 @@
             </script>
         </h1>
     </header>
-    <body>
+    <body  onload="why()">
         <div id=bioholder class="flex-container">
             <img src="" id=profile-picture>
             <div id="fuckmeintheassits2am">
@@ -96,7 +97,6 @@
                     xhReq.send(null);
                     var serverResponse = xhReq.responseText;
                     clonedDiv.querySelector("#title-text").innerHTML = serverResponse;
-                    alert()
 
                     var xhReq = new XMLHttpRequest();
                     xhReq.open("GET", "/GetUserFromPost/" + id, false);
@@ -127,41 +127,43 @@
                     var serverResponse = xhReq.responseText;
                     var rating = serverResponse;
                     for (i=1; i <= rating; i++) {
-                        clonedDiv.querySelector("#" + i).style.cssText = "background-color: gold;"
+                        clonedDiv.querySelector("#star" + i).style.cssText = "background-color: gold;"
                     }
                     var r = (rating % 1) * 100
                     if (rating >= 5) {
                         return
                     }
-                    clonedDiv.querySelector("#" + Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
+                    clonedDiv.querySelector("#star" + Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
                 }
 
-                var user = window.location.href.split("?")[1]
-                document.getElementById("profile-picture").src = "/GetPFP/" + user
-                document.getElementById("profile-header").innerHTML = user
+                function why() {
+                    var user = window.location.href.split("?")[1]
+                    document.getElementById("profile-picture").src = "/GetPFP/" + user
+                    document.getElementById("profile-header").innerHTML = user
 
-                var xhReq = new XMLHttpRequest();
-                xhReq.open("GET", "/GetUserBio/" + user, false);
-                xhReq.send(null);
-                document.getElementById("profile-bio").innerHTML = xhReq.responseText;
-            
-                if (user != document.cookie.split("=")[1]) {
-                    document.getElementById("edit-profile").style.display = "none";
-                }
-
-                var xhReq = new XMLHttpRequest();
-                xhReq.open("GET", "/GetAllPostsByUser/" + user, false);
-                xhReq.send(null);
-                var serverResponse = xhReq.responseText.split('\n');
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetUserBio/" + user, false);
+                    xhReq.send(null);
+                    document.getElementById("profile-bio").innerHTML = xhReq.responseText;
                 
-                for (var i=0; i<serverResponse.length; i++) {
-                    if (serverResponse[i] != "") {
-                        var temp = document.getElementById('post-template');
-                        document.getElementById("bioholder").appendChild(temp.content.cloneNode(true));
-                        var child = document.getElementById("bioholder").children[document.getElementById("bioholder").children.length - 1]
-                        
-                        ajax2(child, serverResponse[i]);
+                    if (user != document.cookie.split("=")[1]) {
+                        document.getElementById("edit-profile").style.display = "none";
+                    }
 
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetAllPostsByUser/" + user, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText.split('\n');
+                    
+                    for (var i=0; i<serverResponse.length; i++) {
+                        if (serverResponse[i] != "") {
+                            var temp = document.getElementById('post-template');
+                            document.getElementById("bioholder").appendChild(temp.content.cloneNode(true));
+                            var child = document.getElementById("bioholder").children[document.getElementById("bioholder").children.length - 1]
+                            
+                            ajax2(child, serverResponse[i]);
+
+                        }
                     }
                 }
             </script>
