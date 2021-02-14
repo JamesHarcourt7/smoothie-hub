@@ -1,4 +1,31 @@
 <html>
+    <template id=post-template>
+        <div id = image-holder><img src="" id=main-smoothie-image></div>
+            <span id = separator></span>
+            <div class=post>
+                <h2 id=title-text></h2>
+                <p>
+                    <img src="" id=pfp>
+                    <a id=user-link href=""><span id=username-text></span></a>
+                </p>
+                
+                <div>
+                    <span class=stars id=1><i class="fa fa-star"></i></span>
+                    <span class=stars id=2><i class="fa fa-star"></i></span>
+                    <span class=stars id=3><i class="fa fa-star"></i></span>
+                    <span class=stars id=4><i class="fa fa-star"></i></span>
+                    <span class=stars id=5><i class="fa fa-star"></i></span>
+                </div>
+    
+                <h3>Description:</h3>
+                <p id = description-text></p>
+    
+                <h3>Ingredients:</h3>
+                <p id=list></p>
+            </div>
+        </div>
+    </template>
+
     <head>
         <link rel="stylesheet" href="styles.css">
         <title>Profile</title>
@@ -15,13 +42,13 @@
         </h1>
     </header>
     <body>
-        <div class="flex-container">
+        <div id=bioholder class="flex-container">
             <img src="" id=profile-picture>
             <div id="fuckmeintheassits2am">
             <h1 id=profile-header></h1>
             <h3 id=profile-subheader>Bio:</h3>
             <p id=profile-bio></p>
-            <form action="UpdateProfileInfo" method="post" enctype="multipart/form-data">
+            <form action="UpdateProfileInfo" method="post" enctype="multipart/form-data" style="height:0 auto;">
                 <label id=pfpchange-label>Change profile picture: </label><input id=pfpchange-submit type="file" name="changePFP"><br><br>
                 <input id="usernameBox" name="username", hidden=true>
                 <input type="text" id="new-bio" name="newBio" value="" placeholder="Enter your bio..."><br>
@@ -62,6 +89,53 @@
             </div>
 
             <script>
+                function ajax2(clonedDiv, id) {
+                    
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetTitleFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    clonedDiv.querySelector("#title-text").innerHTML = serverResponse;
+                    alert()
+
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetUserFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    var usernameFromServer = serverResponse;
+                    clonedDiv.querySelector("#username-text").innerHTML = usernameFromServer;
+                    clonedDiv.querySelector("#user-link").href = "/profile?" + usernameFromServer;
+
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetDescFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    clonedDiv.querySelector("#description-text").innerHTML = serverResponse;
+                
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetIngrFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    clonedDiv.querySelector("#list").innerHTML = serverResponse;
+
+                    clonedDiv.querySelector("#main-smoothie-image").src = "/GetImageFromPost/" + id;
+                    clonedDiv.querySelector("#pfp").src = "/GetPFP/" + usernameFromServer;
+
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetRatingFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    var rating = serverResponse;
+                    for (i=1; i <= rating; i++) {
+                        clonedDiv.querySelector("#" + i).style.cssText = "background-color: gold;"
+                    }
+                    var r = (rating % 1) * 100
+                    if (rating >= 5) {
+                        return
+                    }
+                    clonedDiv.querySelector("#" + Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
+                }
+
                 var user = window.location.href.split("?")[1]
                 document.getElementById("profile-picture").src = "/GetPFP/" + user
                 document.getElementById("profile-header").innerHTML = user
@@ -75,8 +149,24 @@
                     document.getElementById("edit-profile").style.display = "none";
                 }
 
-            </script>
+                var xhReq = new XMLHttpRequest();
+                xhReq.open("GET", "/GetAllPostsByUser/" + user, false);
+                xhReq.send(null);
+                var serverResponse = xhReq.responseText.split('\n');
+                
+                for (var i=0; i<serverResponse.length; i++) {
+                    if (serverResponse[i] != "") {
+                        var temp = document.getElementById('post-template');
+                        document.getElementById("bioholder").appendChild(temp.content.cloneNode(true));
+                        var child = document.getElementById("bioholder").children[document.getElementById("bioholder").children.length - 1]
+                        
+                        ajax2(child, serverResponse[i]);
 
+                    }
+                }
+            </script>
+                    
         </div>
+
     </body>
 </html>
