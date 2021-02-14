@@ -1,1 +1,51 @@
-[{"username":"carl","hashedPassword":"3705019","bio":"editing james's bio!","postsRated":[],"postsSeen":["testuserHOHEV90","testuserROHUN678","testuserDISUF425","carlPUPOM990","testuserBUMAK724","testuserWIHIC611","testuserGINAF38","testuserJIVOL575","testuserMALIV403","testuserFOHEF940","testuser3PENID723","testuserDELOB380","testuserJIHOB540","carlHIGAK747"]},{"username":"carl2","hashedPassword":"114855639","bio":"I'm not human enough to have a bio","postsRated":[],"postsSeen":[]},{"username":"carl3","hashedPassword":"114855640","bio":"I'm not human enough to have a bio","postsRated":[],"postsSeen":[]},{"username":"carl4","hashedPassword":"114855641","bio":"I'm not human enough to have a bio","postsRated":[],"postsSeen":[]},{"username":"testuser8","hashedPassword":"1216985755","bio":"I'm not human enough to have a bio","postsRated":[],"postsSeen":[]},{"username":"testuser","hashedPassword":"1216985755","bio":"I'm not human enough to have a bio","postsRated":[],"postsSeen":[]},{"username":"james","hashedPassword":"3705019","bio":"","postsRated":[],"postsSeen":[]}]
+[
+   {
+      "username": "carl",
+      "hashedPassword": "3705019",
+      "bio": "editing james's bio!",
+      "postsRated": [],
+      "postsSeen": []
+   },
+   {
+      "username": "carl2",
+      "hashedPassword": "114855639",
+      "bio": "I'm not human enough to have a bio",
+      "postsRated": [],
+      "postsSeen": []
+   },
+   {
+      "username": "carl3",
+      "hashedPassword": "114855640",
+      "bio": "I'm not human enough to have a bio",
+      "postsRated": [],
+      "postsSeen": []
+   },
+   {
+      "username": "carl4",
+      "hashedPassword": "114855641",
+      "bio": "I'm not human enough to have a bio",
+      "postsRated": [],
+      "postsSeen": []
+   },
+   {
+      "username": "testuser8",
+      "hashedPassword": "1216985755",
+      "bio": "I'm not human enough to have a bio",
+      "postsRated": [],
+      "postsSeen": []
+   },
+   {
+      "username": "testuser",
+      "hashedPassword": "1216985755",
+      "bio": "I'm not human enough to have a bio",
+      "postsRated": [],
+      "postsSeen": []
+   },
+   {
+      "username": "james",
+      "hashedPassword": "3705019",
+      "bio": "",
+      "postsRated": [],
+      "postsSeen": []
+   }
+]

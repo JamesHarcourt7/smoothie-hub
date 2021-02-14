@@ -120,9 +120,11 @@ function loadUsers() {
   for(var i = 0; i < userBuffer.length; i++) {
     users.push(new User(userBuffer[i].username, userBuffer[i].hashedPassword, userBuffer[i].bio, userBuffer[i].postsRated))
   }
+  saveUsers()
 }
 function saveUsers() {
-  fs.writeFileSync("users.json", JSON.stringify(users))
+  console.log("\t\t(Saving users)")
+  fs.writeFileSync("users.json", JSON.stringify(users, null, 3))
 }
 function getUserIndex(username) {
   for(var i = 0; i < users.length; i++) {
@@ -205,7 +207,7 @@ function MakePost(req, res) {
     });
   });
 }
-function savePosts() {fs.writeFileSync("posts.json", JSON.stringify(posts))}
+function savePosts() {console.log("\t\t(Saving posts)");fs.writeFileSync("posts.json", JSON.stringify(posts, null, 3))}
 function loadAndAuditPosts () {
   posts = JSON.parse(fs.readFileSync('posts.json'))
   for(var i = 0; i < posts.length; i++) {
