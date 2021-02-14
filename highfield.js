@@ -142,7 +142,7 @@ function loadAndAuditPosts () {
 }
 function ratePost(id, rating, res) {
   index = postsDict[id]
-  posts[index].totalRating += rating
+  posts[index].totalRating += parseInt(rating)
   posts[index].numRatings++
   savePosts()
   res.end("post rated")
