@@ -17,12 +17,22 @@
     <body>
         <div class="flex-container">
             <img src="" id=profile-picture>
-            <span><h1 id=profile-username></h1></span>
+            <div id="fuckmeintheassits2am">
+            <h1 id=profile-header></h1>
+            <h3 id=profile-subheader>Bio:</h3>
+            <p id=profile-bio>Help</p>
+            </div>
+
             <script>
-                var user = window.location.href.split("/")[-1]
-                alert(user)
+                var user = window.location.href.split("?")[1]
                 document.getElementById("profile-picture").src = "/GetPFP/" + user
-                document.getElementById("profile-username").innerHTML = user
+                document.getElementById("profile-header").innerHTML = user
+
+                var xhReq = new XMLHttpRequest();
+                xhReq.open("GET", "/GetBio/" + user, false);
+                xhReq.send(null);
+                document.getElementById("profile-bio").innerHTML = xhReq.responseText;
+
             </script>
 
         </div>

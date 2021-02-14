@@ -133,19 +133,37 @@ header {
     height: auto;
 }
 
-<<<<<<< HEAD
 #profile-picture {
     width: 256px;
     height: 256px;
 }
 
-#profile-username {
-    max-width: 50%;
-    padding: 20px;
-    text-align: center;
-    float: right;
-=======
 .loginInputFormShite {
   padding: 20px;
->>>>>>> 08dd17919c6864360b36206eff7fff6fe3cead26
+}
+
+#profile-header {
+    width: 50%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#profile-subheader {
+    font-size: 32px;
+    width: 50%;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#profile-bio {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#fuckmeintheassits2am {
+    padding: 20px;
 }
