@@ -2,7 +2,7 @@
    {
       "username": "carl",
       "hashedPassword": "3705019",
-      "bio": "edit",
+      "bio": "Longer bio text  ",
       "postsRated": [
          "testuserMALIV403",
          "testuserWIHIC611",
@@ -28,7 +28,8 @@
          "testuserJIVOL575",
          "testuserWIHIC611",
          "testuserDELOB380",
-         "testuserFOHEF940"
+         "testuserFOHEF940",
+         "testuserROHUN678"
       ]
    },
    {
