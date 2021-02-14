@@ -30,7 +30,7 @@
                 <script src="/hiddenUsernameBox.js"></script>
             </form>
             <button id=edit-profile class=optionshite onclick="makeSomeChanges()">Edit Profile</button>
-
+            
             <script>
                 function makeSomeChanges() {
                     // https://www.youtube.com/watch?v=dQw4w9WgXcQ
@@ -70,6 +70,10 @@
                 xhReq.open("GET", "/GetUserBio/" + user, false);
                 xhReq.send(null);
                 document.getElementById("profile-bio").innerHTML = xhReq.responseText;
+            
+                if (user != document.cookie.split("=")[1]) {
+                    document.getElementById("edit-profile").style.display = "none";
+                }
 
             </script>
 
