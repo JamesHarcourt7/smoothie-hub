@@ -126,6 +126,29 @@ function getUserIndex(username) {
   }
   return 0
 }
+function UpdateProfileInfo (req, res) {
+  var uploadForm = new fm.IncomingForm()
+  uploadForm.parse(req, function(error, fields, files) {
+    username = fields.username
+    if(fields.newBio != undefined) {
+      fields.newBio = CheckUserInput(fields.newBio)
+      users[getUserIndex(username)].bio = fields.newBio
+      saveUsers()
+    }
+    if(files.postImage.path != undefined) {
+      oldPath = files.postImage.path
+      pfpFilename = fields.username + ".jpg"
+      newDir = __dirname + "/pfp/"
+      if(!fs.existsSync(newDir)) {
+        fs.mkdirSync(newDir)
+      }
+      fs.rename(oldPath, newDir + pfpFilename, function (err) {
+        if (error) res.end(error)
+      });
+    }
+  })
+  res.end("Profile information updated")
+}
 
 // Post handling functions
 const idLetterBank1 = "BCDFGHJKLMNPRSTVWZ"
@@ -266,6 +289,11 @@ http.createServer( function(req, res) {
     CreateAccount(req,res)
     return
   } else
+
+  if(request == "UpdateProfileInfo") {
+    UpdateProfileInfo(req, res)
+    return
+  }
 
   // Rating requests
   if(request.includes("rate_post")) {
