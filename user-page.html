@@ -46,47 +46,47 @@
         <div id=bioholder class="flex-container">
             <img src="" id=profile-picture>
             <div id="fuckmeintheassits2am">
-            <h1 id=profile-header></h1>
-            <h3 id=profile-subheader>Bio:</h3>
-            <p id=profile-bio></p>
-            <form action="UpdateProfileInfo" method="post" enctype="multipart/form-data" style="height:0 auto;">
-                <label id=pfpchange-label>Change profile picture: </label><input id=pfpchange-submit type="file" name="changePFP"><br><br>
-                <input id="usernameBox" name="username", hidden=true>
-                <input type="text" id="new-bio" name="newBio" value="" placeholder="Enter your bio..."><br>
-                <input id=save-changes class=optionshite type="submit" value="Save Changes" onsubmit="goBackToHowItWasBeforePlease()"> 
-                <button id=cancel-changes class=optionshite type="button" onclick="cancelthatshizzle()">Cancel</button>
-                <script src="/hiddenUsernameBox.js"></script>
-            </form>
-            <button id=edit-profile class=optionshite onclick="makeSomeChanges()">Edit Profile</button>
-            
-            <script>
-                function makeSomeChanges() {
-                    // https://www.youtube.com/watch?v=dQw4w9WgXcQ
-                    document.getElementById("profile-subheader").style.display = "none";
-                    document.getElementById("profile-bio").style.display = "none";
-                    document.getElementById("edit-profile").style.display = "none";
-                    document.getElementById("pfpchange-label").style.display = "block";
-                    document.getElementById("pfpchange-submit").style.display = "inline";
-                    document.getElementById("new-bio").style.display = "block";
-                    document.getElementById("save-changes").style.display = "inline";
-                    document.getElementById("cancel-changes").style.display = "inline";
-                }
-                function cancelthatshizzle() {
-                    goBackToHowItWasBeforePlease()
-                }
-                function goBackToHowItWasBeforePlease() {
-                    document.getElementById("new-bio").value = "";
-                    document.getElementById("pfpchange-submit").value = "";
-                    document.getElementById("profile-subheader").style.display = "block";
-                    document.getElementById("profile-bio").style.display = "block";
-                    document.getElementById("edit-profile").style.display = "block";
-                    document.getElementById("pfpchange-label").style.display = "none";
-                    document.getElementById("pfpchange-submit").style.display = "none";
-                    document.getElementById("new-bio").style.display = "none";
-                    document.getElementById("save-changes").style.display = "none";
-                    document.getElementById("cancel-changes").style.display = "none";
-                }
-            </script>
+                <h1 id=profile-header></h1>
+                <h3 id=profile-subheader>Bio:</h3>
+                <p id=profile-bio></p>
+                <form action="UpdateProfileInfo" method="post" enctype="multipart/form-data" style="height:0 auto;">
+                    <label id=pfpchange-label>Change profile picture: </label><input id=pfpchange-submit type="file" name="changePFP"><br><br>
+                    <input id="usernameBox" name="username", hidden=true>
+                    <input type="text" id="new-bio" name="newBio" value="" placeholder="Enter your bio..."><br>
+                    <input id=save-changes class=optionshite type="submit" value="Save Changes" onsubmit="goBackToHowItWasBeforePlease()"> 
+                    <button id=cancel-changes class=optionshite type="button" onclick="cancelthatshizzle()">Cancel</button>
+                    <script src="/hiddenUsernameBox.js"></script>
+                </form>
+                <button id=edit-profile class=optionshite onclick="makeSomeChanges()">Edit Profile</button>
+                
+                <script>
+                    function makeSomeChanges() {
+                        // https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                        document.getElementById("profile-subheader").style.display = "none";
+                        document.getElementById("profile-bio").style.display = "none";
+                        document.getElementById("edit-profile").style.display = "none";
+                        document.getElementById("pfpchange-label").style.display = "block";
+                        document.getElementById("pfpchange-submit").style.display = "inline";
+                        document.getElementById("new-bio").style.display = "block";
+                        document.getElementById("save-changes").style.display = "inline";
+                        document.getElementById("cancel-changes").style.display = "inline";
+                    }
+                    function cancelthatshizzle() {
+                        goBackToHowItWasBeforePlease()
+                    }
+                    function goBackToHowItWasBeforePlease() {
+                        document.getElementById("new-bio").value = "";
+                        document.getElementById("pfpchange-submit").value = "";
+                        document.getElementById("profile-subheader").style.display = "block";
+                        document.getElementById("profile-bio").style.display = "block";
+                        document.getElementById("edit-profile").style.display = "block";
+                        document.getElementById("pfpchange-label").style.display = "none";
+                        document.getElementById("pfpchange-submit").style.display = "none";
+                        document.getElementById("new-bio").style.display = "none";
+                        document.getElementById("save-changes").style.display = "none";
+                        document.getElementById("cancel-changes").style.display = "none";
+                    }
+                </script>
             </div>
 
             <script>
@@ -155,19 +155,22 @@
                     xhReq.send(null);
                     var serverResponse = xhReq.responseText.split('\n');
                     
+                    var to_add = document.getElementById("probablygood")
                     for (var i=0; i<serverResponse.length; i++) {
                         if (serverResponse[i] != "") {
                             var temp = document.getElementById('post-template');
-                            document.getElementById("bioholder").appendChild(temp.content.cloneNode(true));
-                            var child = document.getElementById("bioholder").children[document.getElementById("bioholder").children.length - 1]
-                            
+                            to_add.appendChild(temp.content.cloneNode(true));
+                            var child = to_add.children[to_add.children.length - 1]
+                            to_add = child
                             ajax2(child, serverResponse[i]);
 
                         }
                     }
                 }
-            </script>
-                    
+            </script>       
+        </div>
+        <div class="flex-container" id="probablygood">
+
         </div>
 
     </body>
