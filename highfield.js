@@ -2,7 +2,7 @@
 // Classes
 class Post {
   constructor(username, filename, description, ingredients, title)  {
-    this.username = username; this.filename = filename; this.description = description; this.ingredients = ingredients; this.title = title
+    this.username = username; this.filename = filename; this.description = description; this.ingredients = ingredients; this.title = title;
   }
   totalRating = 0
   numRatings = 0
@@ -18,11 +18,15 @@ class Post {
     }
     return false
   }
+  get id () {
+    return this.filename.substring(0, this.filename.length - 4)
+  }
 }
 class User {
-  constructor(username, hashedPassword, bio, postsRated) {
-    this.username = username; this.hashedPassword = hashedPassword; this.bio = bio; this.postsRated = postsRated
+  constructor(username, hashedPassword, bio, postsRated, postsSeen) {
+    this.username = username; this.hashedPassword = hashedPassword; this.bio = bio; this.postsRated = postsRated; this.postsSeen = postsSeen
     if(this.postsRated == undefined || this.postsRated.length == 0) this.postsRated = new Array(0)
+    if(postsSeen == undefined) this.postsSeen = new Array(0)
   }
   hasRated (postID) {
     for (var i = 0; i < this.postsRated.length; i++) {
@@ -214,8 +218,8 @@ function loadAndAuditPosts () {
   posts = posts.filter(function(item){return item != undefined})
   savePosts()
   for(var i = 0; i < posts.length; i++) {
-    postsDict[posts[i].filename.substring(0, posts[i].filename.length - 4)] = i
     posts[i] = new Post(posts[i].username, posts[i].filename, posts[i].description, posts[i].ingredients, posts[i].title)
+    postsDict[posts[i].id] = i
   }
   console.log(postsDict)
 }
@@ -363,7 +367,7 @@ http.createServer( function(req, res) {
 
   // Get title
   if(request.includes("GetTitleFromPost")) {
-    // /GetDescFromPost/[post id]
+    // /GetTitleFromPost/[post id]
     split = request.split('/')
     post = posts[postsDict[split[1]]]
     res.end(post.title)
@@ -398,8 +402,20 @@ http.createServer( function(req, res) {
     // /SuggestNextPost/[username]
     split = request.split('/')
     username = split[1]
-    i = Math.floor(Math.random() * posts.length)
-    res.end(posts[i].filename.substring(0, posts[i].filename.length - 4))
+    var user = users[getUserIndex(username)]
+
+    queue = Array(0)
+    for(var i = 0; i < posts.length; i++) {
+      queue.push(i)
+      if(!user.postsSeen.includes(posts[i].id)) {
+        for(var j = 0; j < 3; j++) queue.push(i)
+      }
+    }
+
+    i = queue[Math.floor(Math.random() * queue.length)]
+
+    user.postsSeen.push(posts[i].id)
+    res.end(posts[i].id)
   } else
 
   // Get all post IDs posted by the given username
