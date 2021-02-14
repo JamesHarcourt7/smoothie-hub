@@ -246,6 +246,7 @@ function ratePost(id, rating, username, res) {
 }
 function GetAllPostsByUser(username) {
   postsByUser = ""
+  if(!fs.existsSync(__dirname + "/posts/" + username + "/")) return ""
   fs.readdirSync(__dirname + "/posts/" + username + "/").forEach(file => {
     postsByUser += file.substring(0, file.length-4) + '\n'
   })
