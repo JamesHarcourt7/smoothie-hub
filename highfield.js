@@ -262,6 +262,7 @@ function GetLikedPostsByUser(username) {
 }
 function SearchAllPosts (searchTerm) {
   out = ""
+  if(searchTerm.length < 1) return out
   st = searchTerm.toUpperCase()
   for(var i = 0; i < posts.length; i++) {
     if(posts[i].title.toUpperCase().includes(st)
