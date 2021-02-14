@@ -20,7 +20,35 @@
             <div id="fuckmeintheassits2am">
             <h1 id=profile-header></h1>
             <h3 id=profile-subheader>Bio:</h3>
-            <p id=profile-bio>Help</p>
+            <p id=profile-bio></p>
+            <input type="text" id="new-bio" name="new-bio" value="" placeholder="Enter your bio..."><br>
+            <button id=edit-profile class=optionshite onclick="makeSomeChanges()">Edit Profile</button>
+            <button id=save-changes class=optionshite onclick="saveChanges()">Save Changes</button>
+            <button id=cancel-changes class=optionshite onclick="cancelthatshizzle()">Cancel</button>
+
+            <script>
+                function makeSomeChanges() {
+                    document.getElementById("profile-subheader").style.display = "none";
+                    document.getElementById("profile-bio").style.display = "none";
+                    document.getElementById("edit-profile").style.display = "none";
+                    document.getElementById("new-bio").style.display = "block";
+                    document.getElementById("save-changes").style.display = "inline";
+                    document.getElementById("cancel-changes").style.display = "inline";
+                }
+                function saveChanges() {
+                    goBackToHowItWasBeforePlease()
+                }
+                function cancelthatshizzle() {
+                    goBackToHowItWasBeforePlease()
+                }
+                function goBackToHowItWasBeforePlease() {
+                    document.getElementById("profile-subheader").style.display = "block";
+                    document.getElementById("profile-bio").style.display = "block";
+                    document.getElementById("edit-profile").style.display = "block";
+                    document.getElementById("save-changes").style.display = "none";
+                    document.getElementById("cancel-changes").style.display = "none";
+                }
+            </script>
             </div>
 
             <script>
@@ -29,7 +57,7 @@
                 document.getElementById("profile-header").innerHTML = user
 
                 var xhReq = new XMLHttpRequest();
-                xhReq.open("GET", "/GetBio/" + user, false);
+                xhReq.open("GET", "/GetUserBio/" + user, false);
                 xhReq.send(null);
                 document.getElementById("profile-bio").innerHTML = xhReq.responseText;
 

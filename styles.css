@@ -167,3 +167,7 @@ header {
 #fuckmeintheassits2am {
     padding: 20px;
 }
+
+#save-changes, #cancel-changes {
+    display: none;
+}
