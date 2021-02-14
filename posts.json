@@ -40,11 +40,9 @@
       "title": "The Vampire"
    },
    {
-      "totalRating": 5,
-      "numRatings": 1,
-      "raters": [
-         null
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserMALIV403.jpg",
       "description": "\"A concoction to feast (or burn) your eyes on\"",
@@ -62,9 +60,11 @@
       "title": "Pineapple Drink"
    },
    {
-      "totalRating": 0,
-      "numRatings": 0,
-      "raters": [],
+      "totalRating": 5,
+      "numRatings": 1,
+      "raters": [
+         null
+      ],
       "username": "testuser3",
       "filename": "testuser3PENID723.jpg",
       "description": "\"Strawberries and blueberries mixed up only as much as you can stand\"",
