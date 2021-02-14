@@ -4,7 +4,7 @@ body {
     color: black;
     resize: both;
     overflow: scroll;
-    font-family: "Lucidia Console", monospace;
+    font-family: "Comic Sans", monospace;
 }
 
 h1 {
@@ -168,6 +168,6 @@ header {
     padding: 20px;
 }
 
-#save-changes, #cancel-changes {
+#save-changes, #cancel-changes, #new-bio, #pfpchange-label, #pfpchange-submit {
     display: none;
 }
