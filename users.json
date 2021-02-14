@@ -2,7 +2,7 @@
    {
       "username": "carl",
       "hashedPassword": "3705019",
-      "bio": "Longer bio text  ",
+      "bio": "Smoothie and & 127345 & 65039 EAN aficionado",
       "postsRated": [
          "testuserMALIV403",
          "testuserWIHIC611",
@@ -17,7 +17,24 @@
          "testuser3PENID723",
          "testuserJIHOB540"
       ],
+<<<<<<< Updated upstream
       "postsSeen": []
+=======
+      "postsSeen": [
+         "testuserGINAF38",
+         "testuserJIVOL575",
+         "testuserROHUN678",
+         "testuserDELOB380",
+         "testuserMALIV403",
+         "testuserWIHIC611",
+         "testuserDISUF425",
+         "testuserJIHOB540",
+         "carlHIGAK747",
+         "testuserFOHEF940",
+         "testuser3PENID723",
+         "testuserHOHEV90"
+      ]
+>>>>>>> Stashed changes
    },
    {
       "username": "carl2",
@@ -75,7 +92,7 @@
    {
       "username": "carl5",
       "hashedPassword": "3705019",
-      "bio": "",
+      "bio": "Appreciator of smoothies",
       "postsRated": [
          "testuserWIHIC611",
          "testuserJIVOL575",
@@ -93,7 +110,14 @@
       "postsSeen": [
          "testuserJIHOB540",
          "testuserDELOB380",
+<<<<<<< Updated upstream
          "testuserFOHEF940"
+=======
+         "testuserDISUF425",
+         "testuserJIVOL575",
+         "testuserFOHEF940",
+         "testuserROHUN678"
+>>>>>>> Stashed changes
       ]
    },
    {
