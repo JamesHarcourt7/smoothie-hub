@@ -14,7 +14,10 @@
                 <span><button class=optionshite id=home-logout-button onclick="logout()">Log Out</button></span>
                 <script>
                     function goToProfile() {
-                        window.location.href="/profile.html"
+                        var iKnowIDefineItLaterButJSIsStupidAndIDontLikeIt = document.cookie.split("=")[1]
+                        if (iKnowIDefineItLaterButJSIsStupidAndIDontLikeIt != "") {
+                            window.location.href="/profile/" + iKnowIDefineItLaterButJSIsStupidAndIDontLikeIt
+                        }
                     }
                     function goToCreatePost() {
                         window.location.href="/createpost.html"
@@ -141,7 +144,7 @@
                         var serverResponse = xhReq.responseText;
                         var usernameFromServer = serverResponse;
                         document.getElementById("username-text").innerHTML = usernameFromServer;
-                        document.getElementById("user-link").href = "/" + usernameFromServer;
+                        document.getElementById("user-link").href = "/profile/" + usernameFromServer;
 
                         var xhReq = new XMLHttpRequest();
                         xhReq.open("GET", "/GetDescFromPost/" + id, false);
