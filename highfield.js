@@ -6,14 +6,30 @@ class Post {
   }
   totalRating = 0
   numRatings = 0
+  raters = Array(0)
   getRating () {
     if(this.numRatings == 0) return 0
     return this.totalRating / this.numRatings
   }
+  hasRated (username) {
+    for(var i = 0; i < this.raters.length; i++) {
+      console.log("Does \"" + this.raters[i] + "==\"" + username + "\"?" + (this.raters[i] == username))
+      if(this.raters[i] == username) return true
+    }
+    return false
+  }
 }
 class User {
-  constructor(username, hashedPassword, bio) {
-    this.username = username; this.hashedPassword = hashedPassword; this.bio = bio
+  constructor(username, hashedPassword, bio, postsRated) {
+    this.username = username; this.hashedPassword = hashedPassword; this.bio = bio; this.postsRated = postsRated
+    if(this.postsRated == undefined || this.postsRated.length == 0) this.postsRated = new Array(0)
+  }
+  hasRated (postID) {
+    for (var i = 0; i < this.postsRated.length; i++) {
+      console.log("Does \"" + this.postsRated[i] + "==\"" + postID + "\"?" + (this.postsRated[i] == postID))
+      if(this.postsRated[i] == postID) return true
+    }
+    return false
   }
 }
 
@@ -25,7 +41,7 @@ function sanitise (input) {
 // Account handling functions
 function AddUser (username, passHash) {
   //fs.appendFileSync("database.csv", username + "," + passHash + "\n")
-  users.push(new User(username, passHash, ""))
+  users.push(new User(username, passHash, "", new Array(0)))
   saveUsers()
 }
 function CheckUser (username, passHash) {
@@ -72,10 +88,19 @@ function CreateAccount(req, res) {
   });
 }
 function loadUsers() {
-  users = JSON.parse(fs.readFileSync('users.json'))
+  userBuffer = JSON.parse(fs.readFileSync('users.json'))
+  for(var i = 0; i < userBuffer.length; i++) {
+    users.push(new User(userBuffer[i].username, userBuffer[i].hashedPassword, userBuffer[i].bio, userBuffer[i].postsRated))
+  }
 }
 function saveUsers() {
   fs.writeFileSync("users.json", JSON.stringify(users))
+}
+function getUserIndex(username) {
+  for(var i = 0; i < users.length; i++) {
+    if(users[i].username == username) return i
+  }
+  return 0
 }
 
 // Post handling functions
@@ -140,8 +165,20 @@ function loadAndAuditPosts () {
   }
   console.log(postsDict)
 }
-function ratePost(id, rating, res) {
+function ratePost(id, rating, username, res) {
   index = postsDict[id]
+
+  userIndex = getUserIndex(username)
+  if(users[userIndex].hasRated(id)) {
+    res.end("already rated")
+    return;
+  }
+
+  users[userIndex].postsRated.push(id)
+  posts[postsDict[id]].raters.push(username)
+  saveUsers()
+  savePosts()
+
   posts[index].totalRating += parseInt(rating)
   posts[index].numRatings++
   savePosts()
@@ -194,9 +231,9 @@ http.createServer( function(req, res) {
 
   // Rating requests
   if(request.includes("rate_post")) {
-    // /rate_post/[post id]/rating
+    // /rate_post/[post id]/rating/[username]
     split = request.split('/')
-    ratePost(split[1], parseInt(split[2]), res)
+    ratePost(split[1], parseInt(split[2]), split[3], res)
   } else
 
   // Getting an Image
