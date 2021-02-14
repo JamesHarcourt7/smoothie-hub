@@ -1,4 +1,33 @@
 <html>
+    <template id=post-template>
+        <div id=jesustakethewheel>
+            <div>
+            <span><img src="" id=main-smoothie-image></span>
+            <span class=post>
+                <h2 id=title-text></h2>
+                <p>
+                    <img src="" id=pfp>
+                    <a id=user-link href=""><span id=username-text></span></a>
+                </p>
+                
+                <div>
+                    <span class=stars id=star1><i class="fa fa-star"></i></span>
+                    <span class=stars id=star2><i class="fa fa-star"></i></span>
+                    <span class=stars id=star3><i class="fa fa-star"></i></span>
+                    <span class=stars id=star4><i class="fa fa-star"></i></span>
+                    <span class=stars id=star5><i class="fa fa-star"></i></span>
+                </div>
+    
+                <h3>Description:</h3>
+                <p id = description-text></p>
+    
+                <h3>Ingredients:</h3>
+                <p id=list></p>
+            </span>
+            </div>
+        </div>
+    </template>
+
     <head>
         <link rel="stylesheet" href="styles.css">
         <title>Search</title>
@@ -16,21 +45,89 @@
     </header>
     <body>
         <div class="flex-container">
-            <form action="" method="post" enctype="multipart/form-data" style="margin:0 auto;">
-                <div><input type="text" oninput="updateSearchResults()" id="searchTerm" name="searchTerm" value="" placeholder="Enter your search term..." size=40% style="line-height:60px;font-size:60px"><br></div>
+            <form action="" method="post" enctype="multipart/form-data" style="width: 50%; margin:0 auto; margin-right: 0px; margin-left: 0px">
+                <div><input type="text" oninput="updateSearchResults()" id="searchTerm" name="searchTerm" value="" placeholder="Enter your search term..." size=40% style="width: 200%; line-height:60px;font-size:60px"><br></div>
             </form>
             <script>
-              function updateSearchResults() {
-                // Fetch new search results from the server and display them here
-                // console.log("New search results would be fetched now.")
-                var xhReq = new XMLHttpRequest();
-                searchTerm = document.getElementById("searchTerm").value
-                xhReq.open("GET", "/SearchAllPosts/" + searchTerm, false);
-                xhReq.send(null);
-                var serverResponse = xhReq.responseText;
-                console.log(searchTerm + ": Server responded " + serverResponse)
-              }
+                function updateSearchResults() {
+                    // Fetch new search results from the server and display them here
+                    // console.log("New search results would be fetched now.")
+                    var xhReq = new XMLHttpRequest();
+                    searchTerm = document.getElementById("searchTerm").value
+                    xhReq.open("GET", "/SearchAllPosts/" + searchTerm, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    console.log(searchTerm + ": Server responded " + serverResponse)
+                    document.getElementById("heresathing").innerHTML = "";
+                    why(serverResponse)
+                }
+
+                function ajax2(clonedDiv, id) {
+                    
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetTitleFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    clonedDiv.querySelector("#title-text").innerHTML = serverResponse;
+
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetUserFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    var usernameFromServer = serverResponse;
+                    clonedDiv.querySelector("#username-text").innerHTML = usernameFromServer;
+                    clonedDiv.querySelector("#user-link").href = "/profile?" + usernameFromServer;
+
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetDescFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    clonedDiv.querySelector("#description-text").innerHTML = serverResponse;
+                
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetIngrFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    clonedDiv.querySelector("#list").innerHTML = serverResponse;
+
+                    clonedDiv.querySelector("#main-smoothie-image").src = "/GetImageFromPost/" + id;
+                    clonedDiv.querySelector("#pfp").src = "/GetPFP/" + usernameFromServer;
+
+                    var xhReq = new XMLHttpRequest();
+                    xhReq.open("GET", "/GetRatingFromPost/" + id, false);
+                    xhReq.send(null);
+                    var serverResponse = xhReq.responseText;
+                    var rating = serverResponse;
+                    for (i=1; i <= rating; i++) {
+                        clonedDiv.querySelector("#star" + i).style.cssText = "background-color: gold;"
+                    }
+                    var r = (rating % 1) * 100
+                    if (rating >= 5) {
+                        return
+                    }
+                    clonedDiv.querySelector("#star" + Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
+                }
+                
+                function why(serverResponse) {
+                    var serverResponse = serverResponse.split('\n')
+                    
+                    var to_add = document.getElementById("heresathing")
+                    for (var i=0; i<serverResponse.length; i++) {
+                        if (serverResponse[i] != "") {
+                            var temp = document.getElementById('post-template');
+                            to_add.appendChild(temp.content.cloneNode(true));
+                            var child = to_add.children[to_add.children.length - 1]
+                            to_add = child
+                            ajax2(child, serverResponse[i]);
+
+                        }
+                    }
+                }
+
             </script>
+        </div>
+        <div id="heresathing" class="flex-container" style="position: absolute; top: 50%;">
+
         </div>
     </body>
 </html>
