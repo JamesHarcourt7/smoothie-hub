@@ -134,7 +134,7 @@
                     if (rating >= 5) {
                         return
                     }
-                    clonedDiv.querySelector("#star" + Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
+                    clonedDiv.querySelector("#star" + Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);-webkit-background-clip: text;-moz-background-clip: text;-webkit-text-fill-color: transparent;"
                 }
 
                 function why() {

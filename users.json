@@ -17,18 +17,7 @@
          "testuser3PENID723",
          "testuserJIHOB540"
       ],
-      "postsSeen": [
-         "testuserGINAF38",
-         "testuserJIVOL575",
-         "testuserROHUN678",
-         "testuserDELOB380",
-         "testuserMALIV403",
-         "testuserWIHIC611",
-         "testuserDISUF425",
-         "testuserJIHOB540",
-         "carlHIGAK747",
-         "testuserFOHEF940"
-      ]
+      "postsSeen": []
    },
    {
       "username": "carl2",
@@ -94,20 +83,7 @@
          "testuserMALIV403",
          "testuserGINAF38"
       ],
-      "postsSeen": [
-         "testuserROHUN678",
-         "testuserGINAF38",
-         "testuserWIHIC611",
-         "testuserFOHEF940",
-         "testuserJIVOL575",
-         "testuserDELOB380",
-         "testuserMALIV403",
-         "testuserJIHOB540",
-         "testuserDISUF425",
-         "testuser3PENID723",
-         "testuserHOHEV90",
-         "carlHIGAK747"
-      ]
+      "postsSeen": []
    },
    {
       "username": "",
@@ -115,9 +91,8 @@
       "bio": "",
       "postsRated": [],
       "postsSeen": [
+         "testuserJIHOB540",
          "testuserDELOB380",
-         "testuserDISUF425",
-         "testuserJIVOL575",
          "testuserFOHEF940"
       ]
    },
@@ -128,13 +103,40 @@
       "postsRated": [
          "testuserGINAF38"
       ],
+      "postsSeen": []
+   },
+   {
+      "username": "james2",
+      "hashedPassword": "3705019",
+      "bio": "",
+      "postsRated": [
+         "testuserWIHIC611"
+      ],
       "postsSeen": [
-         "testuserDELOB380",
-         "testuserJIVOL575",
+         "testuserWIHIC611"
+      ]
+   },
+   {
+      "username": "james3",
+      "hashedPassword": "3705019",
+      "bio": "",
+      "postsRated": [
          "testuserWIHIC611",
+         "testuserHOHEV90"
+      ],
+      "postsSeen": [
+         "testuser3PENID723",
+         "testuserMALIV403",
+         "testuserJIHOB540",
          "testuserROHUN678",
+         "testuserFOHEF940",
          "testuserHOHEV90",
-         "testuserGINAF38"
+         "testuserDELOB380",
+         "testuserDISUF425",
+         "testuserGINAF38",
+         "carlHIGAK747",
+         "testuserWIHIC611",
+         "testuserJIVOL575"
       ]
    }
 ]

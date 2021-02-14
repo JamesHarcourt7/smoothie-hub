@@ -179,7 +179,7 @@ header {
 
 #holdposts {
     position: absolute;
-    top: 110%;
+    top: 5%;
     left: 0px;
     right: 0px;
 }
@@ -203,4 +203,8 @@ header {
     margin-bottom: 40%;
     left: 0px;
     right: 0px;
+}
+
+#itsnearlyoverLETSGOO {
+    color:palevioletred;
 }

@@ -1,11 +1,8 @@
 [
    {
-      "totalRating": 5,
-      "numRatings": 2,
-      "raters": [
-         "carl5",
-         "carl6"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserGINAF38.jpg",
       "description": "\"GUNK\"",
@@ -13,11 +10,9 @@
       "title": "Jar of Green Goo"
    },
    {
-      "totalRating": 5,
-      "numRatings": 1,
-      "raters": [
-         "carl5"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserJIVOL575.jpg",
       "description": "\"Pink smoothie\"",
@@ -35,10 +30,11 @@
       "title": "Pot o' Gold"
    },
    {
-      "totalRating": 0,
-      "numRatings": 1,
+      "totalRating": 5,
+      "numRatings": 2,
       "raters": [
-         "carl5"
+         "james2",
+         "james3"
       ],
       "username": "testuser",
       "filename": "testuserWIHIC611.jpg",
@@ -47,11 +43,9 @@
       "title": "The Vampire"
    },
    {
-      "totalRating": 5,
-      "numRatings": 1,
-      "raters": [
-         "carl5"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserMALIV403.jpg",
       "description": "\"A concoction to feast (or burn) your eyes on\"",
@@ -99,9 +93,11 @@
       "title": "Daily Dose of Chlorophyll"
    },
    {
-      "totalRating": 0,
-      "numRatings": 0,
-      "raters": [],
+      "totalRating": 5,
+      "numRatings": 1,
+      "raters": [
+         "james3"
+      ],
       "username": "testuser",
       "filename": "testuserHOHEV90.jpg",
       "description": "\"Grey, beige, whatever you please. This isn't a feast for the eyes.\"",
@@ -109,11 +105,9 @@
       "title": "Colourblind-Friendly Boredom"
    },
    {
-      "totalRating": 5,
-      "numRatings": 1,
-      "raters": [
-         "carl5"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserDELOB380.jpg",
       "description": "\"Great for kids who will judge its contents by colour. Little racists they are.\"",

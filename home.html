@@ -131,7 +131,7 @@
                             return
                         }
                         var r = (rating % 1) * 100
-                        document.getElementById("star" + Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
+                        document.getElementById("star" + Math.floor(rating + 1).toString()).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (100 - r).toString() + "%);-webkit-background-clip: text;-moz-background-clip: text;-webkit-text-fill-color: transparent;"
                     }
                 </script>
 
@@ -185,7 +185,8 @@
                         if (rating >= 5) {
                             return
                         }
-                        document.getElementById(Math.floor(rating + 1)).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (1 - r).toString() + "%);"
+                        console.log("background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (100 - r).toString() + "%);-webkit-background-clip: text;-moz-background-clip: text;-webkit-text-fill-color: transparent;")
+                        document.getElementById("star" + Math.floor(rating + 1).toString()).style.cssText = "background-color: linear-gradient(to right,  gold " + r.toString() + "%, white " + (100 - r).toString() + "%);-webkit-background-clip: text;-moz-background-clip: text;-webkit-text-fill-color: transparent;"
                     }
                     ajax()
 
