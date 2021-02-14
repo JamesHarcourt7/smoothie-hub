@@ -49,7 +49,7 @@ function CheckUserInput (input) {
   }
 }
 function CheckItem(input) {return CheckItem(input, 5000)}
-checkAllowed = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890,._-:£><=!()[]& "
+checkAllowed = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890,._-:£><=!()[]&\' "
 function CheckItem (input, length) {
   if(input == undefined) return input
   if(input.length > length) return input.substring(0, length)
@@ -130,14 +130,14 @@ function UpdateProfileInfo (req, res) {
   var uploadForm = new fm.IncomingForm()
   uploadForm.parse(req, function(error, fields, files) {
     username = fields.username
-    if(fields.newBio != undefined) {
+    if(fields.newBio != undefined && fields.newBio.length > 0) {
       fields.newBio = CheckUserInput(fields.newBio)
       users[getUserIndex(username)].bio = fields.newBio
       saveUsers()
     }
-    if(files.postImage.path != undefined) {
-      oldPath = files.postImage.path
-      pfpFilename = fields.username + ".jpg"
+    if(files.changePFP != undefined && files.changePFP.size>0) {
+      oldPath = files.changePFP.path
+      pfpFilename = username + ".jpg"
       newDir = __dirname + "/pfp/"
       if(!fs.existsSync(newDir)) {
         fs.mkdirSync(newDir)
@@ -146,8 +146,9 @@ function UpdateProfileInfo (req, res) {
         if (error) res.end(error)
       });
     }
+    res.writeHead(302, {'Location': '/profile?' + username});
+    res.end()
   })
-  res.end("Profile information updated")
 }
 
 // Post handling functions
@@ -196,7 +197,7 @@ function MakePost(req, res) {
       res.write('<a href=\'/home.html\'>Back to home</a>')
       res.end()
       //console.log(fields)
-      enregisterPost(username, postFilename, '\"' + fields.postDescription + '\"', fields.postIngredients, fields.postTitle)
+      enregisterPost(username, postFilename, fields.postDescription, fields.postIngredients, fields.postTitle)
     });
   });
 }
