@@ -18,18 +18,16 @@
          "testuserJIHOB540"
       ],
       "postsSeen": [
-         "testuserMALIV403",
-         "testuserJIHOB540",
-         "carlHIGAK747",
-         "testuserDISUF425",
-         "testuserHOHEV90",
-         "testuser3PENID723",
          "testuserGINAF38",
          "testuserJIVOL575",
-         "testuserWIHIC611",
+         "testuserROHUN678",
          "testuserDELOB380",
-         "testuserFOHEF940",
-         "testuserROHUN678"
+         "testuserMALIV403",
+         "testuserWIHIC611",
+         "testuserDISUF425",
+         "testuserJIHOB540",
+         "carlHIGAK747",
+         "testuserFOHEF940"
       ]
    },
    {
@@ -69,11 +67,7 @@
          "testuserDISUF425",
          "carlHIGAK747"
       ],
-      "postsSeen": [
-         "testuserJIVOL575",
-         "testuserDELOB380",
-         "testuserWIHIC611"
-      ]
+      "postsSeen": []
    },
    {
       "username": "james",
@@ -88,5 +82,59 @@
          "testuserJIHOB540"
       ],
       "postsSeen": []
+   },
+   {
+      "username": "carl5",
+      "hashedPassword": "3705019",
+      "bio": "",
+      "postsRated": [
+         "testuserWIHIC611",
+         "testuserJIVOL575",
+         "testuserDELOB380",
+         "testuserMALIV403",
+         "testuserGINAF38"
+      ],
+      "postsSeen": [
+         "testuserROHUN678",
+         "testuserGINAF38",
+         "testuserWIHIC611",
+         "testuserFOHEF940",
+         "testuserJIVOL575",
+         "testuserDELOB380",
+         "testuserMALIV403",
+         "testuserJIHOB540",
+         "testuserDISUF425",
+         "testuser3PENID723",
+         "testuserHOHEV90",
+         "carlHIGAK747"
+      ]
+   },
+   {
+      "username": "",
+      "hashedPassword": "0",
+      "bio": "",
+      "postsRated": [],
+      "postsSeen": [
+         "testuserDELOB380",
+         "testuserDISUF425",
+         "testuserJIVOL575",
+         "testuserFOHEF940"
+      ]
+   },
+   {
+      "username": "carl6",
+      "hashedPassword": "3705019",
+      "bio": "",
+      "postsRated": [
+         "testuserGINAF38"
+      ],
+      "postsSeen": [
+         "testuserDELOB380",
+         "testuserJIVOL575",
+         "testuserWIHIC611",
+         "testuserROHUN678",
+         "testuserHOHEV90",
+         "testuserGINAF38"
+      ]
    }
 ]

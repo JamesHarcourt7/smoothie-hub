@@ -3,8 +3,8 @@
       "totalRating": 5,
       "numRatings": 2,
       "raters": [
-         null,
-         "james"
+         "carl5",
+         "carl6"
       ],
       "username": "testuser",
       "filename": "testuserGINAF38.jpg",
@@ -14,10 +14,9 @@
    },
    {
       "totalRating": 5,
-      "numRatings": 2,
+      "numRatings": 1,
       "raters": [
-         null,
-         "james"
+         "carl5"
       ],
       "username": "testuser",
       "filename": "testuserJIVOL575.jpg",
@@ -26,12 +25,9 @@
       "title": "Just a Regular Smoothie"
    },
    {
-      "totalRating": 5,
-      "numRatings": 2,
-      "raters": [
-         null,
-         "james"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserROHUN678.jpg",
       "description": "\"Rainbow smoothie\"",
@@ -39,11 +35,10 @@
       "title": "Pot o' Gold"
    },
    {
-      "totalRating": 5,
-      "numRatings": 2,
+      "totalRating": 0,
+      "numRatings": 1,
       "raters": [
-         null,
-         "testuser"
+         "carl5"
       ],
       "username": "testuser",
       "filename": "testuserWIHIC611.jpg",
@@ -52,9 +47,11 @@
       "title": "The Vampire"
    },
    {
-      "totalRating": 0,
-      "numRatings": 0,
-      "raters": [],
+      "totalRating": 5,
+      "numRatings": 1,
+      "raters": [
+         "carl5"
+      ],
       "username": "testuser",
       "filename": "testuserMALIV403.jpg",
       "description": "\"A concoction to feast (or burn) your eyes on\"",
@@ -62,12 +59,9 @@
       "title": "Very Orange Drink"
    },
    {
-      "totalRating": 5,
-      "numRatings": 2,
-      "raters": [
-         null,
-         "testuser"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserDISUF425.jpg",
       "description": "\"If you like pineapples this one's for you\"",
@@ -75,12 +69,9 @@
       "title": "Pineapple Drink"
    },
    {
-      "totalRating": 5,
-      "numRatings": 2,
-      "raters": [
-         null,
-         "james"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser3",
       "filename": "testuser3PENID723.jpg",
       "description": "\"Strawberries and blueberries mixed up only as much as you can stand\"",
@@ -88,12 +79,9 @@
       "title": "The Undefined"
    },
    {
-      "totalRating": 5,
-      "numRatings": 2,
-      "raters": [
-         null,
-         "james"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserFOHEF940.jpg",
       "description": "\"Just another uncreative red fluid\"",
@@ -101,12 +89,9 @@
       "title": "Kinda Red Drink"
    },
    {
-      "totalRating": 5,
-      "numRatings": 2,
-      "raters": [
-         null,
-         "james"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserJIHOB540.jpg",
       "description": "\"So green it'll turn you green\"",
@@ -114,11 +99,9 @@
       "title": "Daily Dose of Chlorophyll"
    },
    {
-      "totalRating": 5,
-      "numRatings": 1,
-      "raters": [
-         null
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "testuser",
       "filename": "testuserHOHEV90.jpg",
       "description": "\"Grey, beige, whatever you please. This isn't a feast for the eyes.\"",
@@ -129,7 +112,7 @@
       "totalRating": 5,
       "numRatings": 1,
       "raters": [
-         null
+         "carl5"
       ],
       "username": "testuser",
       "filename": "testuserDELOB380.jpg",
@@ -138,12 +121,9 @@
       "title": "Mint, I Think?"
    },
    {
-      "totalRating": 5,
-      "numRatings": 2,
-      "raters": [
-         null,
-         "testuser"
-      ],
+      "totalRating": 0,
+      "numRatings": 0,
+      "raters": [],
       "username": "carl",
       "filename": "carlHIGAK747.jpg",
       "description": "When your fruits just can't stay up",
