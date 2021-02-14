@@ -40,9 +40,11 @@
       "title": "The Vampire"
    },
    {
-      "totalRating": 0,
-      "numRatings": 0,
-      "raters": [],
+      "totalRating": 5,
+      "numRatings": 1,
+      "raters": [
+         null
+      ],
       "username": "testuser",
       "filename": "testuserMALIV403.jpg",
       "description": "\"A concoction to feast (or burn) your eyes on\"",
@@ -68,16 +70,6 @@
       "description": "\"Strawberries and blueberries mixed up only as much as you can stand\"",
       "ingredients": "Strawberries, blueberries, water, sugar, raspberries",
       "title": "The Undefined"
-   },
-   {
-      "totalRating": 0,
-      "numRatings": 0,
-      "raters": [],
-      "username": "testuser",
-      "filename": "testuserBUMAK724.jpg",
-      "description": "\"This website doesn't have spam protection!\"",
-      "ingredients": "SPAM, Spam (the meat stuff), Effort, Pain",
-      "title": "Not a Smoothie"
    },
    {
       "totalRating": 0,
@@ -118,16 +110,6 @@
       "description": "\"Great for kids who will judge its contents by colour. Little racists they are.\"",
       "ingredients": "Veg, chlorine bleach, green dye, toy car",
       "title": "Mint, I Think?"
-   },
-   {
-      "totalRating": 0,
-      "numRatings": 0,
-      "raters": [],
-      "username": "carl",
-      "filename": "carlPUPOM990.jpg",
-      "description": "CARDU",
-      "ingredients": "Cbrghga",
-      "title": "Crud"
    },
    {
       "totalRating": 0,

@@ -7,6 +7,15 @@
     </head>
     <body>
         <header>
+          <!-- Current user logged in -->
+          <div style="display:flex;position:absolute;left:8px;right:80%;top:25%,bottom:25%;padding=10px;margin: 0 auto;">
+            <p style="margin: 0 auto;" id="logininfo">Test?</p>
+            <script>
+              userCurrentlyLoggedIn = document.cookie.split("=")[1]
+              textLoginStuff = userCurrentlyLoggedIn.length > 0 ? "Currently logged in as " + userCurrentlyLoggedIn : "Not logged in"
+              document.getElementById("logininfo").innerHTML = textLoginStuff
+            </script>
+          </div>
             <h1>Smoothie Hub
                 <span><button class=optionshite id=home-login-button onclick="goToLogin()">Login</button></span>
                 <span><button class=optionshite id=home-profile-button onclick="goToProfile()">Profile</button></span>
@@ -40,7 +49,6 @@
 
                 </script>
             </h1>
-
         </header>
 
         <div class="flex-container">
@@ -180,6 +188,7 @@
                 </script>
 
             </div>
+            <!-- Button to refresh -->
             <div style="display:flex;background-color:peachpuff;position:absolute;left:0px;right:0px;top:101%;padding:10px;">
               <button type="button" onclick="refresh()" style="margin:0 auto;display:block;width: 100%;border:none;background-color:palevioletred;padding:14px 28px;font-size: 16px;color:white;font-weight:bold;">Next Post</button>
               <script>
