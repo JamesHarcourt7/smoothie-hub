@@ -191,6 +191,14 @@ function GetAllPostsByUser(username) {
   })
   return postsByUser
 }
+function GetLikedPostsByUser(username) {
+  likedPostsByUser = ""
+  r = users[getUserIndex(username)].postsRated
+  for(var i = 0; i < r.length; i++) {
+    likedPostsByUser += r[i] + '\n'
+  }
+  return likedPostsByUser
+}
 
 // Libraries, constant variables, other shite
 const http = require('http')
@@ -236,6 +244,11 @@ http.createServer( function(req, res) {
     ratePost(split[1], parseInt(split[2]), split[3], res)
   } else
 
+  // List liked posts
+  if(request.includes("likedposts/")) {
+    res.end(GetLikedPostsByUser(request.split('/')[1]));
+  } else
+
   // Profile pages
   if(request.includes("profile?")) {
     // /profile/[username]
@@ -260,6 +273,10 @@ http.createServer( function(req, res) {
       return
     }
     fs.createReadStream(__dirname + "/pfp/" + split[1] + ".jpg").pipe(res)
+  } else
+
+  if(request.includes("GetUserBio")) {
+    res.end(users[getUserIndex(request.split('/')[1])].bio)
   } else
 
   // Get a Description
