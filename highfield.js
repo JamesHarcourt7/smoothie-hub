@@ -414,7 +414,8 @@ http.createServer( function(req, res) {
 
     i = queue[Math.floor(Math.random() * queue.length)]
 
-    user.postsSeen.push(posts[i].id)
+    if(!user.postsSeen.includes(posts[i].id)) user.postsSeen.push(posts[i].id) // don't duplicate
+    saveUsers()
     res.end(posts[i].id)
   } else
 
