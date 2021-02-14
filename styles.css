@@ -4,7 +4,7 @@ body {
     color: black;
     resize: both;
     overflow: scroll;
-    font-family: "Comic Sans", monospace;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 h1 {
@@ -146,7 +146,7 @@ header {
     width: 50%;
     margin-top: 5px;
     margin-bottom: 5px;
-    text-align: center;
+    text-align: left;
 }
 
 #profile-subheader {
@@ -165,9 +165,21 @@ header {
 }
 
 #fuckmeintheassits2am {
+    width: 100%;
     padding: 20px;
 }
 
 #save-changes, #cancel-changes, #new-bio, #pfpchange-label, #pfpchange-submit {
     display: none;
+}
+
+#profile-bio{
+    width: 100%;
+}
+
+#holdposts {
+    position: absolute;
+    top: 110%;
+    left: 0px;
+    right: 0px;
 }
